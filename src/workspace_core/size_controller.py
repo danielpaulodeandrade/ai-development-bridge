@@ -19,11 +19,17 @@ class ContextSizeController:
         self.root_path = root_path
         
     def _read_file_content(self, file_meta: FileMeta) -> str:
-        """Lê o conteúdo do arquivo."""
+        """Lê o conteúdo do arquivo e aplica compressão quando possível."""
         full_path = os.path.join(self.root_path, file_meta.path)
         try:
             with open(full_path, "r", encoding="utf-8") as f:
-                return f.read()
+                content = f.read()
+                
+            if file_meta.extension == ".py":
+                from src.workspace_core.compressor import CodeCompressor
+                content = CodeCompressor.compress_python(content)
+                
+            return content
         except UnicodeDecodeError:
             return f"[{file_meta.path} contém binário ou encoding não suportado]"
         except OSError:
