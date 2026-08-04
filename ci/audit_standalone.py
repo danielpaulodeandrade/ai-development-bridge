@@ -69,7 +69,7 @@ SUPPORTED_EXTENSIONS = {".py", ".js", ".ts", ".jsx", ".tsx", ".json"}
 def collect_files_full(target_path: Path) -> list[dict]:
     """Collect ALL source files from the project, ignoring metadata/logs."""
     files = []
-    ignored_dirs = {"chronicle", "studio", "node_modules", "venv", ".git", "__pycache__"}
+    ignored_dirs = {"chronicle", "studio", "node_modules", "venv", ".venv", ".git", "__pycache__"}
     for root, dirs, filenames in os.walk(target_path):
         dirs[:] = [d for d in dirs if d not in ignored_dirs]
         for fname in filenames:
