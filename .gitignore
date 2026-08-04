@@ -17,6 +17,10 @@ __pycache__/
 
 # Generated
 docs/generated/
+.bridge_history.json
+*.egg-info/
+build/
+dist/
 
 # Continue
 .continue/
