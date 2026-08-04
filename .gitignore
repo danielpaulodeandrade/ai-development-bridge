@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# IDE
+.vscode/
+
+# Playwright
+.playwright/
+
+# Tests
+.pytest_cache/
+
+# Generated
+docs/generated/
+
+# Continue
+.continue/
