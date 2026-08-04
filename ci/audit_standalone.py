@@ -12,6 +12,12 @@ import os
 import sys
 import json
 import argparse
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 import py_compile
 import subprocess
 from pathlib import Path
