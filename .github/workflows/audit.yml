@@ -1,0 +1,65 @@
+name: 🛡️ Archon Security Audit
+
+on:
+  pull_request:
+    branches: [main, dev]
+    types: [opened, synchronize, reopened]
+
+# Allow the Action to post comments on the PR
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  # === Configure your Auditor here ===
+  # Supported providers: groq, openai, openrouter
+  AUDITOR_PROVIDER: groq
+  AUDITOR_MODEL: llama-3.3-70b-versatile
+  # Mode: "diff" (only changed files) or "full" (entire project)
+  AUDIT_MODE: full
+
+jobs:
+  archon-audit:
+    name: Archon Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout the PR code (with full history for diff mode)
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history needed for git diff
+
+      # 2. Setup Python
+      - name: 🐍 Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # 3. Install minimal dependencies (no Neo4j, no Milvus, no LangGraph)
+      - name: 📦 Install Audit Dependencies
+        run: |
+          pip install langchain-core langchain-groq langchain-openai python-dotenv
+
+      # 4. Run the Archon Auditor
+      - name: 🛡️ Run Archon Security Audit
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          python ci/audit_standalone.py ./ --mode ${{ env.AUDIT_MODE }} --output audit_report.md
+        continue-on-error: true
+
+      # 5. Post audit report as a PR comment
+      - name: 💬 Post Audit Report on PR
+        if: always()
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-path: audit_report.md
+
+      # 6. Fail the check if audit found issues
+      - name: ⛔ Enforce Audit Result
+        run: |
+          python ci/audit_standalone.py ./ --mode ${{ env.AUDIT_MODE }} --output /dev/null
