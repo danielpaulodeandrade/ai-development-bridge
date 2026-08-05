@@ -45,7 +45,8 @@ class BrowserDaemon:
                 "--disable-blink-features=AutomationControlled",
                 "--start-maximized"
             ],
-            no_viewport=True  # Permite que a janela redimensione livremente
+            no_viewport=True,  # Permite que a janela redimensione livremente
+            permissions=["clipboard-read", "clipboard-write"] # Crucial para M4-002 extrair markdown nativo
         )
         
         pages = self._context.pages
