@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Development Bridge
 
 # IMPLEMENTATION CONTEXT
 
 ## Objetivo
 
-Este documento orienta a implementação da V1 do Media Studio AI.
+Este documento orienta a implementação da V1.
 
 Ele **não faz parte da documentação oficial** e **não substitui** qualquer documento presente na pasta `docs/`.
 
@@ -14,7 +14,7 @@ Seu objetivo é fornecer aos agentes de IA e aos desenvolvedores um contexto ope
 
 # Status do Projeto
 
-**Projeto:** Media Studio AI
+**Projeto:** AI Development Bridge
 
 **Versão:** V1
 
@@ -24,7 +24,7 @@ Seu objetivo é fornecer aos agentes de IA e aos desenvolvedores um contexto ope
 
 **Status da Implementação:** Em desenvolvimento
 
-**Milestone Atual:** Conforme planejamento oficial (`docs/project/milestones.md`)
+**Milestone Atual:** Milestone 5 — Continue Integration (Ver referência em `docs/generated/Milestones.json`)
 
 Toda implementação deve seguir rigorosamente a documentação oficial.
 
@@ -156,43 +156,13 @@ Antes de implementar qualquer alteração, seguir obrigatoriamente:
 
 # Ordem das Milestones
 
-A implementação deve respeitar exatamente esta sequência:
+A implementação deve respeitar a sequência definida no arquivo gerado pelo GitHub:
 
 ```text
-Milestone 0
-
-↓
-
-Milestone 1
-
-↓
-
-Milestone 2
-
-↓
-
-Milestone 3
-
-↓
-
-Milestone 4
-
-↓
-
-Milestone 5
-
-↓
-
-Milestone 6
-
-↓
-
-Milestone 7
-
-↓
-
-Milestone 8
+docs/generated/Milestones.json
 ```
+
+O agente deve **sempre** ler este arquivo JSON ao iniciar o contexto para saber qual é a próxima milestone válida e qual a sua descrição, ignorando listas estáticas antigas.
 
 Não implementar funcionalidades pertencentes a milestones futuras.
 
