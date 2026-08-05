@@ -19,6 +19,8 @@ class OpenAIProvider(Provider):
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
             raise ValueError("OPENAI_API_KEY environment variable is missing.")
+            
+        self._default_model = os.getenv("OPENAI_DEFAULT_MODEL", "gpt-4o")
         self.client = OpenAI(api_key=api_key)
 
     def send_prompt(self, messages: List[ProviderMessage], model: Optional[str] = None, **kwargs) -> ProviderResponse:
