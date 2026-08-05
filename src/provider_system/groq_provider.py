@@ -19,6 +19,8 @@ class GroqProvider(Provider):
         api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
             raise ValueError("GROQ_API_KEY environment variable is missing.")
+        
+        self._default_model = os.getenv("GROQ_DEFAULT_MODEL", "llama-3.3-70b-versatile")
         self.client = Groq(api_key=api_key)
 
     def send_prompt(self, messages: List[ProviderMessage], model: Optional[str] = None, **kwargs) -> ProviderResponse:

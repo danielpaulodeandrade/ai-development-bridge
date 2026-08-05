@@ -9,10 +9,12 @@ from src.provider_system.groq_provider import GroqProvider
 from src.provider_system.openai_provider import OpenAIProvider
 from src.provider_system.openrouter_provider import OpenRouterProvider
 from src.provider_system.fallback_provider import FallbackProvider
+from src.provider_system.ollama_provider import OllamaProvider
 
 ProviderRegistry.register(GroqProvider)
 ProviderRegistry.register(OpenAIProvider)
 ProviderRegistry.register(OpenRouterProvider)
 ProviderRegistry.register(FallbackProvider)
+ProviderRegistry.register(OllamaProvider)
 
 __all__ = ["Provider", "ProviderMessage", "ProviderResponse", "ProviderRegistry"]
