@@ -111,3 +111,29 @@ class TextFeeder:
                 return False
                 
         return True
+
+    async def send_prompt(self, prompt: str, platform: str = "gemini") -> bool:
+        """Envia um prompt direto sem tratá-lo como arquivo particionado."""
+        if not self.daemon._active_page:
+            raise RuntimeError("BrowserDaemon não possui uma página ativa.")
+        
+        page = self.daemon._active_page
+        selectors = self.SELECTORS.get(platform.lower())
+        if not selectors:
+            logger.warning(f"Plataforma '{platform}' não mapeada.")
+            return False
+
+        try:
+            input_el = page.locator(selectors["input"]).first
+            await input_el.wait_for(state="visible", timeout=10000)
+            await input_el.fill(prompt)
+            
+            btn = page.locator(selectors["submit"]).first
+            await btn.wait_for(state="visible", timeout=5000)
+            await btn.click()
+            
+            await self._wait_for_ai_ready(page)
+            return True
+        except Exception as e:
+            logger.error(f"Erro no envio do prompt: {e}")
+            return False
