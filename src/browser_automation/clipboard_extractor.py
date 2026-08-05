@@ -21,13 +21,30 @@ class ClipboardExtractor:
             ".buttons-container-v2 button"
         ],
         "chatgpt": [
-            "button:has(svg.icon-md-copy)",
-            "button[aria-label='Copy code']",
-            "button.flex.items-center.gap-1.rounded-md.p-1" # ChatGPT UI fallback
+            "button[data-testid='copy-turn-action-button']"
         ],
         "claude": [
-            "button[aria-label='Copy message']",
-            "button:has-text('Copy')"
+            "button[aria-label='Copiar']"
+        ],
+        "deepseek": [
+            ".ds-button--iconLabelTertiary"
+        ],
+        "meta": [
+            "button[aria-label='Copiar respuesta']"
+        ],
+        "deepai": [
+            "button.copytextButton",
+            "button[data-tooltip='Copy']"
+        ],
+        "copilot": [
+            "button[data-testid='copy-ai-message-button']",
+            "button[data-testid='copy-table-button']"
+        ],
+        "poe": [
+            "button[aria-label='Copiar mensaje']"
+        ],
+        "perplexity": [
+            "button[aria-label='Copiar']"
         ]
     }
 
