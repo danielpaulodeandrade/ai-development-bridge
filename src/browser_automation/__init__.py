@@ -3,5 +3,6 @@ Browser Automation Framework
 Milestone 4 - Media Studio AI
 """
 from .browser_daemon import BrowserDaemon
+from .clipboard_extractor import ClipboardExtractor
 
-__all__ = ["BrowserDaemon"]
+__all__ = ["BrowserDaemon", "ClipboardExtractor"]
