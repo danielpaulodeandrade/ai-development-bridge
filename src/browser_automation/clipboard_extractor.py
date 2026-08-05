@@ -33,10 +33,18 @@ class ClipboardExtractor:
             "button[aria-label='Copiar respuesta']"
         ],
         "deepai": [
-            "button.copytextButton"
+            "button.copytextButton",
+            "button[data-tooltip='Copy']"
         ],
         "copilot": [
-            "button[data-testid='copy-ai-message-button']"
+            "button[data-testid='copy-ai-message-button']",
+            "button[data-testid='copy-table-button']"
+        ],
+        "poe": [
+            "button[aria-label='Copiar mensaje']"
+        ],
+        "perplexity": [
+            "button[aria-label='Copiar']"
         ]
     }
 
