@@ -94,9 +94,41 @@ class ClipboardExtractor:
                 continue
                 
         if not clicked:
-            logger.error(f"Não foi possível encontrar nenhum botão de cópia para a plataforma: {platform}")
-            # M4-004 entrará em ação aqui no futuro (Adaptive Selector)
-            return None
+            logger.warning(f"Não foi possível encontrar nenhum botão de cópia na lista estática para: {platform}. Tentando Self-Healing...")
+            
+            from .adaptive_recovery import AdaptiveRecovery
+            recovery = AdaptiveRecovery()
+            
+            # Tenta primeiro usar o que já foi curado e salvo no cache
+            cached_sel = recovery.get_cached_selector(platform, "copy_button")
+            if cached_sel:
+                try:
+                    logger.info(f"Tentando seletor do cache: {cached_sel}")
+                    btn = page.locator(cached_sel).last
+                    await btn.scroll_into_view_if_needed()
+                    await btn.click(timeout=3000)
+                    await asyncio.sleep(0.5)
+                    clicked = True
+                except Exception as e:
+                    logger.debug(f"Cache falhou, partindo para o LLM. Erro: {e}")
+            
+            # Se o cache falhar, invoca o LLM local para descobrir o novo seletor
+            if not clicked:
+                new_sel = await recovery.recover(page, platform, "copy_button")
+                if new_sel:
+                    try:
+                        logger.info("Executando clique com o novo seletor curado pelo LLM.")
+                        btn = page.locator(new_sel).last
+                        await btn.scroll_into_view_if_needed()
+                        await btn.click(timeout=3000)
+                        await asyncio.sleep(0.5)
+                        clicked = True
+                    except Exception as e:
+                        logger.error(f"Mesmo com o LLM, o clique falhou: {e}")
+                        
+            if not clicked:
+                logger.error("Self-Healing falhou. Botão de cópia não foi encontrado.")
+                return None
 
         # Lê o conteúdo do clipboard usando a API do navegador nativa injetada via evaluate
         try:
