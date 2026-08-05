@@ -1,0 +1,22 @@
+{
+  "models": [
+    {
+      "title": "Bridge API - Gemini",
+      "provider": "openai",
+      "model": "gemini",
+      "apiBase": "http://localhost:8000/v1"
+    },
+    {
+      "title": "Bridge API - ChatGPT",
+      "provider": "openai",
+      "model": "chatgpt",
+      "apiBase": "http://localhost:8000/v1"
+    },
+    {
+      "title": "Bridge API - Claude",
+      "provider": "openai",
+      "model": "claude",
+      "apiBase": "http://localhost:8000/v1"
+    }
+  ]
+}
