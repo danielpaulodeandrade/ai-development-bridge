@@ -24,6 +24,7 @@ PyInstaller.__main__.run([
     '--hidden-import=uvicorn',
     '--hidden-import=fastapi',
     '--hidden-import=sse_starlette',
+    '--hidden-import=src.interface_layer.main',
 ])
 
 print("Compilation finished. Executable is located in the 'dist' folder.")
