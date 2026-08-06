@@ -10,14 +10,10 @@ para que você possa usá-las na sua IDE favorita como se fossem a API da OpenAI
 CONFIGURAÇÃO INICIAL (Apenas na 1a vez)
 ----------------------------------------------------------------
 
-1) Arquivo .env (Chaves de API):
+1) Arquivo .env:
 Ao rodar este executável pela primeira vez, ele criou um arquivo chamado ".env" nesta pasta.
-Abra este arquivo no bloco de notas e preencha as chaves de API dos provedores de nuvem que desejar usar.
-Para obter as chaves gratuitas, acesse:
-- Groq: https://console.groq.com
-- OpenRouter: https://openrouter.ai
-- Cerebras: https://cloud.cerebras.ai
-- Ollama Cloud: https://ollama.com
+Atualmente, a Bridge NÃO requer nenhuma chave de API! Ela orquestra as contas gratuitas que você já possui.
+Esse arquivo .env serve apenas caso queira adicionar variáveis de ambiente avançadas no futuro.
 
 2) Configurando sua IDE (VS Code + Continue):
 Também foi criada uma pasta oculta chamada ".continue" neste diretório.
