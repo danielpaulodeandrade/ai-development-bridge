@@ -1,6 +1,14 @@
 import argparse
 import sys
 import os
+
+if getattr(sys, 'frozen', False):
+    # Set a persistent browser path so Playwright doesn't try to use the temporary _MEIPASS folder
+    # We put it in the local app data folder
+    local_app_data = os.environ.get('LOCALAPPDATA', os.path.expanduser('~'))
+    browser_path = os.path.join(local_app_data, 'AI-Workspace-Bridge', 'pw-browsers')
+    os.environ['PLAYWRIGHT_BROWSERS_PATH'] = browser_path
+
 import uvicorn
 from src.config import settings
 
