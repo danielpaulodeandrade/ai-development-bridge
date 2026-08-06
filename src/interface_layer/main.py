@@ -8,6 +8,8 @@ from typing import List, Optional
 from src.browser_automation.browser_daemon import BrowserDaemon
 from src.browser_automation.text_feeder import TextFeeder
 from src.browser_automation.clipboard_extractor import ClipboardExtractor
+from src.config import settings
+from src.history import history_logger
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +18,7 @@ app = FastAPI(
     version="0.2.0"
 )
 
-browser_daemon = BrowserDaemon(headless=False)
+browser_daemon = BrowserDaemon()
 text_feeder = TextFeeder(browser_daemon)
 clipboard_extractor = ClipboardExtractor(browser_daemon)
 
@@ -64,14 +66,10 @@ async def chat_completions(req: ChatCompletionRequest):
     # Extração de Role Tags para Multi AI Orchestration
     import re
     
-    ROLE_REGISTRY = {
-        "architect": "chatgpt",
-        "coder": "claude",
-        "reviewer": "gemini"
-    }
+    ROLE_REGISTRY = settings.router.get("role_registry", {})
     
     # Default platform fallback
-    platform = "gemini"
+    platform = settings.router.get("default_platform", "gemini")
     
     roles_pattern = "|".join(ROLE_REGISTRY.keys())
     role_match = re.search(rf'@({roles_pattern})\b', prompt, re.IGNORECASE)
@@ -103,6 +101,9 @@ async def chat_completions(req: ChatCompletionRequest):
     
     if not response_text:
         response_text = "Falha ao extrair a resposta do navegador. Verifique a aba e o self-healing."
+        
+    # Salvar no histórico
+    history_logger.log_interaction(platform, prompt, response_text)
 
     # Formatar como OpenAI
     return {
