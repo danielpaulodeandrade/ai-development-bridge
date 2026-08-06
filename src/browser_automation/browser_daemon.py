@@ -55,9 +55,9 @@ class BrowserDaemon:
             "permissions": ["clipboard-read", "clipboard-write"] # Crucial para M4-002 extrair markdown nativo
         }
         
-        # Estratégia de Fallback: Tentar navegadores nativos primeiro (msedge -> chrome)
+        # Estratégia de Fallback: Tentar navegadores nativos primeiro (chrome -> msedge)
         # Se nenhum estiver instalado, usar o Chromium do Playwright (requer download prévio)
-        channels = ["msedge", "chrome", None]
+        channels = ["chrome", "msedge", None]
         
         for channel in channels:
             try:
