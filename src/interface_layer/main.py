@@ -64,22 +64,25 @@ async def chat_completions(req: ChatCompletionRequest):
     # Extração de Role Tags para Multi AI Orchestration
     import re
     
+    ROLE_REGISTRY = {
+        "architect": "chatgpt",
+        "coder": "claude",
+        "reviewer": "gemini"
+    }
+    
     # Default platform fallback
     platform = "gemini"
     
-    role_match = re.search(r'@(architect|coder|reviewer)\b', prompt, re.IGNORECASE)
+    roles_pattern = "|".join(ROLE_REGISTRY.keys())
+    role_match = re.search(rf'@({roles_pattern})\b', prompt, re.IGNORECASE)
+    
     if role_match:
         role = role_match.group(1).lower()
-        if role == "architect":
-            platform = "chatgpt"
-        elif role == "coder":
-            platform = "claude"
-        elif role == "reviewer":
-            platform = "gemini"
+        platform = ROLE_REGISTRY.get(role, platform)
             
         logger.info(f"Role tag '@{role}' detectada! Sobrescrevendo roteamento para {platform}.")
         # Remove a tag do prompt original para higienização
-        prompt = re.sub(r'@(architect|coder|reviewer)\b', '', prompt, flags=re.IGNORECASE).strip()
+        prompt = re.sub(rf'@({roles_pattern})\b', '', prompt, flags=re.IGNORECASE).strip()
     else:
         # Fallback para o modelo da requisição
         if "claude" in req.model.lower():
