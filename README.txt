@@ -31,7 +31,9 @@ COMO USAR
 
 Apenas dê 2 cliques no arquivo "bridge.exe".
 Ele abrirá uma janela preta e iniciará o servidor na porta 8000.
-Na primeira vez que for rodado, ele baixará o navegador Chromium em background (pode demorar 1-2 minutos).
+O sistema utilizará seu Microsoft Edge ou Google Chrome nativo para máxima leveza.
+
+DICA: Se houver conflito de autocompletar ao usar "@gpt" na sua IDE, você pode usar a exclamação no lugar, ex: "!gpt", "!claude".
 
 Não feche a janela preta enquanto estiver programando.
 

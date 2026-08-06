@@ -1,6 +1,6 @@
 [project]
 name = "ai-workspace-bridge"
-version = "1.0.0"
+version = "1.0.1"
 description = "Bridge API to orchestrate multiple AI browser instances for IDEs like Continue."
 requires-python = ">=3.12"
 authors = [
