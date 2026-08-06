@@ -22,11 +22,11 @@ class TextFeeder:
         },
         "claude": {
             "input": "div[contenteditable='true']", 
-            "submit": "button[aria-label='Send Message']"
+            "submit": "button[aria-label*='Enviar'], button[aria-label*='Send']"
         },
         "deepseek": {
-            "input": "#chat-input", 
-            "submit": "button.send"
+            "input": "textarea[placeholder*='DeepSeek'], textarea[name='search']", 
+            "submit": "div.ds-button--primary"
         }
     }
 
@@ -69,6 +69,16 @@ class TextFeeder:
             # Se der timeout, fallback para sleep bruto
             await asyncio.sleep(4)
 
+    async def _fill_input(self, page: Page, input_el, prompt: str):
+        """Preenche o input tentando método nativo e usando fallback para rich-text areas."""
+        try:
+            await input_el.fill(prompt)
+        except Exception as e:
+            logger.debug(f"Fill nativo falhou (comum em rich-text): {e}. Usando insert_text (paste) fallback...")
+            await input_el.click()
+            # insert_text é equivalente a dar um 'colar', ideal para contenteditable/rich-textarea
+            await page.keyboard.insert_text(prompt)
+
     async def feed(self, file_content: str, filename: str, platform: str = "gemini") -> bool:
         if not self.daemon._active_page:
             raise RuntimeError("BrowserDaemon não possui uma página ativa.")
@@ -94,10 +104,9 @@ class TextFeeder:
                 prompt = f"Conteúdo de '{filename}':\n\n{chunk}"
 
             try:
-                # Usar evaluate para injetar o texto no textarea costuma ser mais rápido/robusto
                 input_el = page.locator(selectors["input"]).first
                 await input_el.wait_for(state="visible", timeout=10000)
-                await input_el.fill(prompt)
+                await self._fill_input(page, input_el, prompt)
                 
                 btn = page.locator(selectors["submit"]).first
                 await btn.wait_for(state="visible", timeout=5000)
@@ -126,7 +135,7 @@ class TextFeeder:
         try:
             input_el = page.locator(selectors["input"]).first
             await input_el.wait_for(state="visible", timeout=10000)
-            await input_el.fill(prompt)
+            await self._fill_input(page, input_el, prompt)
             
             btn = page.locator(selectors["submit"]).first
             await btn.wait_for(state="visible", timeout=5000)

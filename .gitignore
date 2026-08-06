@@ -22,7 +22,6 @@ docs/generated/
 build/
 dist/
 
-# Continue
-.continue/
 # Logs
 logs/
+.browser_profile/

@@ -7,8 +7,9 @@ browser:
   timeout_ms: 10000
 
 router:
-  default_platform: "gemini"
+  default_platform: "gpt"
   role_registry:
-    architect: "chatgpt"
-    coder: "claude"
-    reviewer: "gemini"
+    gpt: "chatgpt"
+    gemini: "gemini"
+    claude: "claude"
+    deepseek: "deepseek"

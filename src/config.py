@@ -13,18 +13,26 @@ class Settings:
             cls._instance._load_config()
         return cls._instance
 
+    def _get_base_dir(self):
+        import sys
+        if getattr(sys, 'frozen', False):
+            return os.getcwd()
+        return os.path.dirname(os.path.dirname(__file__))
+
     def _load_config(self):
-        config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config.yaml")
+        base_dir = self._get_base_dir()
+        config_path = os.path.join(base_dir, "config.yaml")
         
         # Default fallback values
         self.server = {"host": "0.0.0.0", "port": 8000}
         self.browser = {"headless": False, "timeout_ms": 10000}
         self.router = {
-            "default_platform": "gemini",
+            "default_platform": "gpt",
             "role_registry": {
-                "architect": "chatgpt",
-                "coder": "claude",
-                "reviewer": "gemini"
+                "gpt": "chatgpt",
+                "gemini": "gemini",
+                "claude": "claude",
+                "deepseek": "deepseek"
             }
         }
         
@@ -49,7 +57,13 @@ class Settings:
 settings = Settings()
 
 def setup_logging():
-    logs_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs")
+    import sys
+    if getattr(sys, 'frozen', False):
+        base_dir = os.getcwd()
+    else:
+        base_dir = os.path.dirname(os.path.dirname(__file__))
+        
+    logs_dir = os.path.join(base_dir, "logs")
     os.makedirs(logs_dir, exist_ok=True)
     
     logging.basicConfig(
