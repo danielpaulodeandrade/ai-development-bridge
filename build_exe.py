@@ -12,6 +12,7 @@ PyInstaller.__main__.run([
     'src/cli.py',
     '--name=bridge',
     '--onefile',
+    '--icon=src/img/bot.ico',
     '--add-data=.env.example;.',
     '--add-data=config.yaml;.',
     '--add-data=README.txt;.',
