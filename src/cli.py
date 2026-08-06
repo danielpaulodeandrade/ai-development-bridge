@@ -47,16 +47,10 @@ def auto_scaffold():
             print(" Aguarde, pode levar entre 1 a 2 minutos...")
             print("============================================================\n")
             
-            # Run playwright install programmatically
+            # Run playwright install in a separate process to avoid event loop closure issues
             try:
-                from playwright.__main__ import main as playwright_main
-                old_argv = sys.argv
-                sys.argv = ['playwright', 'install', 'chromium']
-                try:
-                    playwright_main()
-                except SystemExit:
-                    pass
-                sys.argv = old_argv
+                import subprocess
+                subprocess.run([sys.executable, "install_browser"], check=True)
                 print("\n[OK] Instalação concluída com sucesso!\n")
             except Exception as e:
                 print(f"\n[AVISO] Erro ao baixar o navegador: {e}\n")
@@ -78,10 +72,21 @@ def main():
         help="Plataforma inicial para pré-carregar no navegador (ex: gpt, gemini, claude)"
     )
     
+    # Subcomando 'install_browser' (Hidden)
+    subparsers.add_parser("install_browser", help=argparse.SUPPRESS)
+    
     # Se nenhum argumento for passado, default para start
     args = parser.parse_args(sys.argv[1:] if len(sys.argv) > 1 else ['start'])
     
-    if args.command == "start":
+    if args.command == "install_browser":
+        from playwright.__main__ import main as playwright_main
+        sys.argv = ['playwright', 'install', 'chromium']
+        try:
+            playwright_main()
+        except SystemExit:
+            pass
+        sys.exit(0)
+    elif args.command == "start":
         if args.platform:
             os.environ["BRIDGE_INITIAL_PLATFORM"] = args.platform
             
