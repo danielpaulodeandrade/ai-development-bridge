@@ -7,7 +7,7 @@ browser:
   timeout_ms: 10000
 
 router:
-  default_platform: "gemini"
+  default_platform: "gpt"
   role_registry:
     gpt: "chatgpt"
     gemini: "gemini"

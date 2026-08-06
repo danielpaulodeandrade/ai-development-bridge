@@ -27,7 +27,7 @@ class Settings:
         self.server = {"host": "0.0.0.0", "port": 8000}
         self.browser = {"headless": False, "timeout_ms": 10000}
         self.router = {
-            "default_platform": "gemini",
+            "default_platform": "gpt",
             "role_registry": {
                 "gpt": "chatgpt",
                 "gemini": "gemini",

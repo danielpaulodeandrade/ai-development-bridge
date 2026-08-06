@@ -90,7 +90,7 @@ async def chat_completions(req: ChatCompletionRequest):
     ROLE_REGISTRY = settings.router.get("role_registry", {})
     
     # Default platform fallback
-    platform = settings.router.get("default_platform", "gemini")
+    platform = settings.router.get("default_platform", "gpt")
     
     roles_pattern = "|".join(ROLE_REGISTRY.keys())
     # Suporta tanto @tag quanto !tag
