@@ -93,15 +93,16 @@ async def chat_completions(req: ChatCompletionRequest):
     platform = settings.router.get("default_platform", "gemini")
     
     roles_pattern = "|".join(ROLE_REGISTRY.keys())
-    role_match = re.search(rf'@({roles_pattern})\b', prompt, re.IGNORECASE)
+    # Suporta tanto @tag quanto !tag
+    role_match = re.search(rf'[@!]({roles_pattern})\b', prompt, re.IGNORECASE)
     
     if role_match:
         role = role_match.group(1).lower()
         platform = ROLE_REGISTRY.get(role, platform)
             
-        logger.info(f"Role tag '@{role}' detectada! Sobrescrevendo roteamento para {platform}.")
+        logger.info(f"Role tag detectada (modelo: {role})! Sobrescrevendo roteamento para {platform}.")
         # Remove a tag do prompt original para higienização
-        prompt = re.sub(rf'@({roles_pattern})\b', '', prompt, flags=re.IGNORECASE).strip()
+        prompt = re.sub(rf'[@!]({roles_pattern})\b', '', prompt, flags=re.IGNORECASE).strip()
     else:
         # Fallback para o modelo da requisição
         if "claude" in req.model.lower():
