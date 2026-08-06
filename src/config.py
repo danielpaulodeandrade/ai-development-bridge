@@ -47,3 +47,18 @@ class Settings:
 
 # Global singleton
 settings = Settings()
+
+def setup_logging():
+    logs_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs")
+    os.makedirs(logs_dir, exist_ok=True)
+    
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.StreamHandler(),
+            logging.FileHandler(os.path.join(logs_dir, "bridge.log"), encoding="utf-8")
+        ]
+    )
+
+setup_logging()

@@ -9,6 +9,7 @@ from src.browser_automation.browser_daemon import BrowserDaemon
 from src.browser_automation.text_feeder import TextFeeder
 from src.browser_automation.clipboard_extractor import ClipboardExtractor
 from src.config import settings
+from src.history import history_logger
 
 logger = logging.getLogger(__name__)
 
@@ -100,6 +101,9 @@ async def chat_completions(req: ChatCompletionRequest):
     
     if not response_text:
         response_text = "Falha ao extrair a resposta do navegador. Verifique a aba e o self-healing."
+        
+    # Salvar no histórico
+    history_logger.log_interaction(platform, prompt, response_text)
 
     # Formatar como OpenAI
     return {
