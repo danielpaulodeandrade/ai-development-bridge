@@ -4,6 +4,8 @@ from playwright.async_api import async_playwright, BrowserContext, Page, Playwri
 
 logger = logging.getLogger(__name__)
 
+from src.config import settings
+
 class BrowserDaemon:
     """
     Singleton que mantém a instância do navegador viva em background.
@@ -11,8 +13,12 @@ class BrowserDaemon:
     """
     _instance = None
 
-    def __init__(self, headless: bool = False, profile_dir_name: str = ".browser_profile"):
-        self.headless = headless
+    def __init__(self, headless: bool = None, profile_dir_name: str = ".browser_profile"):
+        if headless is None:
+            self.headless = settings.browser.get("headless", False)
+        else:
+            self.headless = headless
+            
         self._playwright: Playwright | None = None
         self._context: BrowserContext | None = None
         self._active_page: Page | None = None
