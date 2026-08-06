@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="AI Workspace Bridge",
-    version="0.2.0"
+    version="1.0.1"
 )
 
 browser_daemon = BrowserDaemon()
