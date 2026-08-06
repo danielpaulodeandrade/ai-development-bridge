@@ -50,7 +50,6 @@ def auto_scaffold():
             # Run playwright install programmatically
             try:
                 from playwright.__main__ import main as playwright_main
-                import sys
                 old_argv = sys.argv
                 sys.argv = ['playwright', 'install', 'chromium']
                 try:
