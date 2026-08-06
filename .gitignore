@@ -24,3 +24,5 @@ dist/
 
 # Continue
 .continue/
+# Logs
+logs/
