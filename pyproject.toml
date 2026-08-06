@@ -30,3 +30,5 @@ build-backend = "setuptools.build_meta"
 pythonpath = [
   "."
 ]
+[project.scripts]
+bridge = "src.cli:main"
