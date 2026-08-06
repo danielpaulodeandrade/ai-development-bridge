@@ -43,17 +43,39 @@ class BrowserDaemon:
         logger.info(f"Iniciando BrowserDaemon com perfil persistente em: {self.user_data_dir}")
         self._playwright = await async_playwright().start()
         
-        # Lança Chromium ignorando detecções básicas de automação
-        self._context = await self._playwright.chromium.launch_persistent_context(
-            user_data_dir=self.user_data_dir,
-            headless=self.headless,
-            args=[
+        # Configurações base para o lançamento do navegador
+        launch_args = {
+            "user_data_dir": self.user_data_dir,
+            "headless": self.headless,
+            "args": [
                 "--disable-blink-features=AutomationControlled",
                 "--start-maximized"
             ],
-            no_viewport=True,  # Permite que a janela redimensione livremente
-            permissions=["clipboard-read", "clipboard-write"] # Crucial para M4-002 extrair markdown nativo
-        )
+            "no_viewport": True,  # Permite que a janela redimensione livremente
+            "permissions": ["clipboard-read", "clipboard-write"] # Crucial para M4-002 extrair markdown nativo
+        }
+        
+        # Estratégia de Fallback: Tentar navegadores nativos primeiro (msedge -> chrome)
+        # Se nenhum estiver instalado, usar o Chromium do Playwright (requer download prévio)
+        channels = ["msedge", "chrome", None]
+        
+        for channel in channels:
+            try:
+                kwargs = dict(launch_args)
+                if channel:
+                    kwargs["channel"] = channel
+                    logger.info(f"Tentando iniciar com navegador nativo: {channel}")
+                else:
+                    logger.info("Tentando iniciar com o Chromium empacotado pelo Playwright.")
+                    
+                self._context = await self._playwright.chromium.launch_persistent_context(**kwargs)
+                logger.info(f"Navegador {'nativo (' + channel + ')' if channel else 'Chromium Playwright'} iniciado com sucesso.")
+                break
+            except Exception as e:
+                logger.warning(f"Falha ao iniciar canal '{channel}': {e}")
+                
+        if not self._context:
+            raise RuntimeError("Não foi possível iniciar nenhum navegador. Certifique-se de que o Edge, Chrome ou o Chromium do Playwright estão instalados.")
         
         pages = self._context.pages
         if pages:

@@ -51,18 +51,9 @@ def auto_scaffold():
             
         if needs_install:
             print("\n============================================================")
-            print(" Estamos preparando o diretorio isolado para a execução da ferramenta.")
-            print(" Fazendo download do navegador interno (Chromium).")
-            print(" Aguarde, pode levar entre 1 a 2 minutos...")
+            print(" AI Workspace Bridge Standalone Inicializado com Sucesso.")
+            print(" Criando ambiente isolado (.env, .continue, config.yaml).")
             print("============================================================\n")
-            
-            # Run playwright install in a separate process to avoid event loop closure issues
-            try:
-                import subprocess
-                subprocess.run([sys.executable, "install_browser"], check=True)
-                print("\n[OK] Instalação concluída com sucesso!\n")
-            except Exception as e:
-                print(f"\n[AVISO] Erro ao baixar o navegador: {e}\n")
 
 
 def main():
