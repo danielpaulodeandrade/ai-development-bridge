@@ -61,12 +61,34 @@ async def chat_completions(req: ChatCompletionRequest):
     if not prompt:
         prompt = "Hello"
 
-    # Mapear 'model' solicitado para a plataforma
+    # Extração de Role Tags para Multi AI Orchestration
+    import re
+    
+    ROLE_REGISTRY = {
+        "architect": "chatgpt",
+        "coder": "claude",
+        "reviewer": "gemini"
+    }
+    
+    # Default platform fallback
     platform = "gemini"
-    if "claude" in req.model.lower():
-        platform = "claude"
-    elif "gpt" in req.model.lower() or "chatgpt" in req.model.lower():
-        platform = "chatgpt"
+    
+    roles_pattern = "|".join(ROLE_REGISTRY.keys())
+    role_match = re.search(rf'@({roles_pattern})\b', prompt, re.IGNORECASE)
+    
+    if role_match:
+        role = role_match.group(1).lower()
+        platform = ROLE_REGISTRY.get(role, platform)
+            
+        logger.info(f"Role tag '@{role}' detectada! Sobrescrevendo roteamento para {platform}.")
+        # Remove a tag do prompt original para higienização
+        prompt = re.sub(rf'@({roles_pattern})\b', '', prompt, flags=re.IGNORECASE).strip()
+    else:
+        # Fallback para o modelo da requisição
+        if "claude" in req.model.lower():
+            platform = "claude"
+        elif "gpt" in req.model.lower() or "chatgpt" in req.model.lower():
+            platform = "chatgpt"
 
     logger.info(f"Roteando prompt para plataforma web: {platform}")
     
