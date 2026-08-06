@@ -1,34 +1,35 @@
 [project]
 name = "ai-workspace-bridge"
-version = "0.1.0"
-description = "Local bridge between VS Code and AI web interfaces"
+version = "1.0.0"
+description = "Bridge API to orchestrate multiple AI browser instances for IDEs like Continue."
 requires-python = ">=3.12"
+authors = [
+  {name = "Daniel Andrade"}
+]
 
 dependencies = [
     "fastapi",
     "uvicorn",
     "pydantic",
     "playwright",
-    "pyyaml",
-    "python-dotenv"
+    "pyyaml"
 ]
-
 
 [project.optional-dependencies]
 dev = [
     "pytest"
 ]
 
-
 [build-system]
-requires = [
-    "setuptools>=68"
-]
+requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
-pythonpath = [
-  "."
-]
+pythonpath = ["."]
+
 [project.scripts]
 bridge = "src.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
