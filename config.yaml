@@ -9,6 +9,7 @@ browser:
 router:
   default_platform: "gemini"
   role_registry:
-    architect: "chatgpt"
-    coder: "claude"
-    reviewer: "gemini"
+    gpt: "chatgpt"
+    gemini: "gemini"
+    claude: "claude"
+    deepseek: "deepseek"

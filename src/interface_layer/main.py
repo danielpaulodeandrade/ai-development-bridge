@@ -24,8 +24,29 @@ clipboard_extractor = ClipboardExtractor(browser_daemon)
 
 @app.on_event("startup")
 async def startup_event():
+    import os
     logger.info("Iniciando BrowserDaemon na Bridge API...")
     await browser_daemon.start()
+    
+    initial_platform = os.environ.get("BRIDGE_INITIAL_PLATFORM")
+    if not initial_platform:
+        initial_platform = settings.router.get("default_platform", "gpt")
+        
+    URLS = {
+        "gemini": "https://gemini.google.com",
+        "gpt": "https://chatgpt.com",
+        "chatgpt": "https://chatgpt.com",
+        "claude": "https://claude.ai/new",
+        "deepseek": "https://chat.deepseek.com"
+    }
+    
+    target_url = URLS.get(initial_platform.lower())
+    if target_url:
+        logger.info(f"Pré-carregando plataforma inicial: {initial_platform}")
+        try:
+            await browser_daemon.navigate(target_url)
+        except Exception as e:
+            logger.error(f"Erro no pré-carregamento: {e}")
 
 @app.on_event("shutdown")
 async def shutdown_event():
@@ -90,6 +111,21 @@ async def chat_completions(req: ChatCompletionRequest):
 
     logger.info(f"Roteando prompt para plataforma web: {platform}")
     
+    URLS = {
+        "gemini": "https://gemini.google.com",
+        "chatgpt": "https://chatgpt.com",
+        "claude": "https://claude.ai/new",
+        "deepseek": "https://chat.deepseek.com"
+    }
+    
+    target_url = URLS.get(platform)
+    if target_url:
+        try:
+            await browser_daemon.navigate(target_url)
+        except Exception as e:
+            logger.error(f"Erro ao navegar para {target_url}: {e}")
+            return {"error": f"Falha ao navegar para {platform}."}
+    
     # 1. Enviar prompt
     success = await text_feeder.send_prompt(prompt, platform=platform)
     if not success:
@@ -97,7 +133,7 @@ async def chat_completions(req: ChatCompletionRequest):
         
     # 2. Extrair resposta
     logger.info("Extraindo resposta via Clipboard...")
-    response_text = await clipboard_extractor.extract_last_response(platform=platform)
+    response_text = await clipboard_extractor.extract_last_response(prompt=prompt, platform=platform)
     
     if not response_text:
         response_text = "Falha ao extrair a resposta do navegador. Verifique a aba e o self-healing."
@@ -106,7 +142,7 @@ async def chat_completions(req: ChatCompletionRequest):
     history_logger.log_interaction(platform, prompt, response_text)
 
     # Formatar como OpenAI
-    return {
+    response_data = {
         "id": f"chatcmpl-{int(time.time())}",
         "object": "chat.completion",
         "created": int(time.time()),
@@ -121,3 +157,43 @@ async def chat_completions(req: ChatCompletionRequest):
         }],
         "usage": {"prompt_tokens": len(prompt)//4, "completion_tokens": len(response_text)//4, "total_tokens": (len(prompt)+len(response_text))//4}
     }
+
+    if req.stream:
+        from fastapi.responses import StreamingResponse
+        import json
+        
+        async def generate():
+            # Chunk inicial (role)
+            chunk_role = {
+                "id": response_data["id"],
+                "object": "chat.completion.chunk",
+                "created": response_data["created"],
+                "model": response_data["model"],
+                "choices": [{"index": 0, "delta": {"role": "assistant"}, "finish_reason": None}]
+            }
+            yield f"data: {json.dumps(chunk_role)}\n\n"
+            
+            # Chunk com o conteúdo completo
+            chunk_content = {
+                "id": response_data["id"],
+                "object": "chat.completion.chunk",
+                "created": response_data["created"],
+                "model": response_data["model"],
+                "choices": [{"index": 0, "delta": {"content": response_text}, "finish_reason": None}]
+            }
+            yield f"data: {json.dumps(chunk_content)}\n\n"
+            
+            # Chunk final
+            chunk_end = {
+                "id": response_data["id"],
+                "object": "chat.completion.chunk",
+                "created": response_data["created"],
+                "model": response_data["model"],
+                "choices": [{"index": 0, "delta": {}, "finish_reason": "stop"}]
+            }
+            yield f"data: {json.dumps(chunk_end)}\n\n"
+            yield "data: [DONE]\n\n"
+            
+        return StreamingResponse(generate(), media_type="text/event-stream")
+    else:
+        return response_data

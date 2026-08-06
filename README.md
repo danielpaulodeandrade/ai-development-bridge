@@ -34,9 +34,10 @@ browser:
 router:
   default_platform: "gemini"
   role_registry:
-    architect: "chatgpt"
-    coder: "claude"
-    reviewer: "gemini"
+    gpt: "chatgpt"
+    gemini: "gemini"
+    claude: "claude"
+    deepseek: "deepseek"
 ```
 
 ## Como Usar
@@ -44,26 +45,30 @@ router:
 Agora que a Bridge está instalada, você tem acesso global ao utilitário de linha de comando:
 
 ```bash
-# Inicia o servidor Uvicorn e o Navegador em Background
+# Inicia o servidor e o Navegador na plataforma padrão (Gemini)
 bridge start
+
+# Pré-carrega uma plataforma específica na inicialização
+bridge start gpt
+bridge start claude
 ```
 
-Isso subirá um servidor na porta `8000` (ou na porta definida no seu `config.yaml`).
-Basta apontar a URL de endpoint da sua ferramenta favorita para `http://localhost:8000/v1/chat/completions`.
+Isso subirá um servidor na porta `8000`. A Bridge agora suporta nativamente **Streaming Response (SSE)**, garantindo que o texto apareça em tempo real na sua IDE, assim como as APIs oficiais da OpenAI.
 
 ## Integração com VS Code (Continue)
 
-No `config.json` do Continue, adicione:
+A configuração oficial para usar a Bridge com a extensão **Continue** já está fornecida no diretório `.continue` na raiz deste repositório.
 
-```json
-{
-  "models": [
-    {
-      "title": "Bridge API (Multi-AI)",
-      "provider": "openai",
-      "model": "bridge-router",
-      "apiBase": "http://localhost:8000/v1"
-    }
-  ]
-}
-```
+> [!IMPORTANT]
+> **Você DEVE copiar o diretório `.continue` inteiro para a raiz de qualquer novo projeto que for criar.**
+> Ele contém o arquivo `config.yaml` do Continue pré-configurado para se conectar com a Bridge na porta 8000 e usar o modelo `bridge-router`.
+
+## Como interagir com as IAs
+No chat do Continue (ou via atalho `Ctrl+I` direto no código), você pode mandar sua mensagem para a IA padrão, ou usar as **Platform Tags** para rotear a requisição:
+
+- `@gpt Crie a classe Jogador...` -> Envia para o ChatGPT
+- `@claude Revise este código...` -> Envia para o Claude
+- `@deepseek O que são testes...` -> Envia para o DeepSeek
+- `@gemini ...` -> Envia para o Gemini
+
+*A Bridge possui fallbacks robustos para lidar com editores rich-text e extrai as respostas silenciosamente, garantindo a privacidade das suas sessões.*
