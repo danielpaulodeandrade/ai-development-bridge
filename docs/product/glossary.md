@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Glossary
 
 ## Objetivo
 
-Este documento define os termos oficiais utilizados no Media Studio AI.
+Este documento define os termos oficiais utilizados no AI Workspace Bridge.
 
 O objetivo é garantir uma linguagem comum entre:
 
@@ -20,7 +20,7 @@ Os termos definidos neste documento devem ser interpretados conforme descrito aq
 
 # Termos Gerais
 
-## Media Studio AI
+## AI Workspace Bridge
 
 Plataforma autônoma de produção de conteúdo multimídia baseada em inteligência artificial.
 
@@ -510,7 +510,7 @@ Pode incluir:
 
 Instrução enviada ao modelo de IA.
 
-No Media Studio AI, prompts devem ser tratados como componentes reutilizáveis.
+No AI Workspace Bridge, prompts devem ser tratados como componentes reutilizáveis.
 
 ---
 
@@ -526,4 +526,4 @@ Quando um termo não estiver definido neste documento:
 
 # Objetivo Final
 
-Este glossário garante que humanos e agentes utilizem os mesmos conceitos durante todo o desenvolvimento do Media Studio AI.
+Este glossário garante que humanos e agentes utilizem os mesmos conceitos durante todo o desenvolvimento do AI Workspace Bridge.

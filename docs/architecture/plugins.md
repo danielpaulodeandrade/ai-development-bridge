@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Plugins Architecture
 
 ## 1. Objetivo
 
-Este documento define a arquitetura de Plugins do Media Studio AI.
+Este documento define a arquitetura de Plugins do AI Workspace Bridge.
 
 O objetivo dos Plugins é permitir extensibilidade controlada da plataforma através de componentes adicionais que possam ampliar funcionalidades sem modificar o núcleo do sistema.
 
@@ -383,7 +383,7 @@ Novas extensões devem preferencialmente utilizar Plugins quando:
 
 # 16. Conclusão
 
-A arquitetura de Plugins fornece um mecanismo seguro de extensibilidade para o Media Studio AI.
+A arquitetura de Plugins fornece um mecanismo seguro de extensibilidade para o AI Workspace Bridge.
 
 Ela permite adicionar novas capacidades mantendo:
 

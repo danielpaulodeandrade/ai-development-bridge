@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Milestones
 
 ## Objetivo
 
-Este documento define as milestones oficiais do Media Studio AI.
+Este documento define as milestones oficiais do AI Workspace Bridge.
 
 As milestones representam grandes entregas evolutivas da plataforma e organizam a implementação da V1.
 
@@ -22,7 +22,7 @@ A implementação deve seguir obrigatoriamente a ordem definida neste documento.
 
 # Visão Geral
 
-A V1 do Media Studio AI está organizada nas seguintes milestones:
+A V1 do AI Workspace Bridge está organizada nas seguintes milestones:
 
 ```text
 Milestone 0
@@ -375,26 +375,31 @@ Milestone 6.
 
 ---
 
-# Milestone 8 — Agentic Workflow (AACP)
+# Milestone 8 — Analytics & Learning
 
 ## Objetivo
 
-Transformar a Bridge em um nó executor de comandos autônomos baseado no Aletheia Agent Communication Protocol (AACP).
+Fechar o ciclo de melhoria contínua.
 
 ---
 
 ## Entregas
 
-- AACP Parser (Regex Engine);
-- File Executor (os, shutil);
-- Shell Executor com prompt interativo de autorização;
-- Mutação de Response (remoção de tags brutas e injeção de Markdown amigável).
+- banco de métricas;
+- dashboard inicial;
+- relatórios;
+- CTR;
+- retenção;
+- Watch Time;
+- histórico;
+- Learning Worker;
+- sugestões para próximos conteúdos.
 
 ---
 
 ## Resultado esperado
 
-O sistema intercepta tags de AACP e executa manipulação de arquivos localmente.
+O sistema aprende com os resultados obtidos e melhora futuras produções.
 
 ---
 
@@ -444,4 +449,4 @@ Uma milestone é considerada concluída quando:
 
 # Objetivo Final
 
-As milestones organizam a construção progressiva do Media Studio AI, garantindo uma evolução controlada desde a definição do produto até uma plataforma autônoma de produção multimídia.
+As milestones organizam a construção progressiva do AI Workspace Bridge, garantindo uma evolução controlada desde a definição do produto até uma plataforma autônoma de produção multimídia.

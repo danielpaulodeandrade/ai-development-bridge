@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Providers Architecture
 
 ## 1. Objetivo
 
-Este documento define a arquitetura de Providers do Media Studio AI.
+Este documento define a arquitetura de Providers do AI Workspace Bridge.
 
 O objetivo é estabelecer uma camada de abstração responsável pela integração com serviços externos, modelos de inteligência artificial, APIs e recursos computacionais necessários para execução dos workflows da plataforma.
 
@@ -18,7 +18,7 @@ Os Providers devem seguir os seguintes princípios:
 
 ## 2.1 Desacoplamento
 
-O núcleo do Media Studio AI não deve depender diretamente de serviços externos.
+O núcleo do AI Workspace Bridge não deve depender diretamente de serviços externos.
 
 Toda integração externa deve ocorrer através da camada de Providers.
 
@@ -352,6 +352,6 @@ A evolução deve ocorrer apenas através da criação de novas implementações
 
 # 13. Conclusão
 
-A arquitetura de Providers garante que o Media Studio AI permaneça independente de fornecedores específicos, permitindo utilização de modelos locais, serviços externos e futuras integrações sem impacto estrutural no sistema.
+A arquitetura de Providers garante que o AI Workspace Bridge permaneça independente de fornecedores específicos, permitindo utilização de modelos locais, serviços externos e futuras integrações sem impacto estrutural no sistema.
 
 Esta camada é fundamental para manter flexibilidade, portabilidade e evolução contínua da plataforma.

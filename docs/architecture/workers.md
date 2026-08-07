@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Workers Architecture
 
 ## 1. Objetivo
 
-Este documento define a arquitetura de Workers do Media Studio AI.
+Este documento define a arquitetura de Workers do AI Workspace Bridge.
 
 O objetivo dos Workers é fornecer componentes especializados responsáveis pela execução de tarefas dentro dos workflows da plataforma.
 
@@ -601,7 +601,7 @@ A evolução deve preservar a separação entre:
 
 # 23. Conclusão
 
-Workers são os componentes executores especializados do Media Studio AI.
+Workers são os componentes executores especializados do AI Workspace Bridge.
 
 Eles permitem transformar workflows complexos em etapas independentes, reutilizáveis e controladas.
 

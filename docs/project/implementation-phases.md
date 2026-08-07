@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Implementation Phases
 
 ## Objetivo
 
-Este documento define as fases oficiais de implementação do Media Studio AI.
+Este documento define as fases oficiais de implementação do AI Workspace Bridge.
 
 As fases representam a evolução progressiva da plataforma, organizando a execução das Milestones definidas no roadmap da V1.
 
@@ -400,4 +400,4 @@ Uma fase é considerada concluída quando:
 
 # Objetivo Final
 
-As fases existem para garantir que o Media Studio AI evolua como uma plataforma modular, previsível e sustentável, mantendo alinhamento entre planejamento, arquitetura e implementação.
+As fases existem para garantir que o AI Workspace Bridge evolua como uma plataforma modular, previsível e sustentável, mantendo alinhamento entre planejamento, arquitetura e implementação.

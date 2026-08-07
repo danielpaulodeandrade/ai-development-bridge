@@ -35,6 +35,7 @@ class Settings:
                 "deepseek": "deepseek"
             }
         }
+        self.agent = {"workspace_dir": ""}
         
         if os.path.exists(config_path):
             try:
@@ -47,11 +48,25 @@ class Settings:
                             self.browser.update(data["browser"])
                         if "router" in data:
                             self.router.update(data["router"])
+                        if "agent" in data:
+                            self.agent.update(data["agent"])
                 logger.info("Configuração carregada de config.yaml com sucesso.")
             except Exception as e:
                 logger.error(f"Erro ao ler config.yaml: {e}. Usando valores padrão.")
         else:
             logger.warning("Arquivo config.yaml não encontrado. Usando valores padrão.")
+
+    def get_workspace_dir(self):
+        """Resolves the working directory for the agent, prioritizing env var, then config, then fallback"""
+        env_dir = os.environ.get("BRIDGE_WORKSPACE_DIR")
+        if env_dir and os.path.exists(env_dir):
+            return env_dir
+            
+        config_dir = self.agent.get("workspace_dir")
+        if config_dir and os.path.exists(config_dir):
+            return config_dir
+            
+        return os.getcwd()
 
 # Global singleton
 settings = Settings()

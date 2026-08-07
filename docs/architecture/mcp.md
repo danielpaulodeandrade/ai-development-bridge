@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # MCP Architecture
 
 ## 1. Objetivo
 
-Este documento define a arquitetura de integração MCP (Model Context Protocol) do Media Studio AI.
+Este documento define a arquitetura de integração MCP (Model Context Protocol) do AI Workspace Bridge.
 
 O objetivo do MCP é fornecer um padrão de comunicação para integração entre agentes, ferramentas externas e recursos especializados.
 
@@ -14,7 +14,7 @@ A camada MCP permite que o sistema utilize ferramentas externas de forma padroni
 
 # 2. Visão Geral
 
-O MCP atua como uma camada de integração entre o sistema de agentes do Media Studio AI e ferramentas externas.
+O MCP atua como uma camada de integração entre o sistema de agentes do AI Workspace Bridge e ferramentas externas.
 
 Arquitetura conceitual:
 
@@ -391,7 +391,7 @@ A evolução deve preservar o desacoplamento arquitetural definido na V1.
 
 # 16. Conclusão
 
-O MCP fornece uma camada padronizada para conectar o Media Studio AI ao ecossistema externo de ferramentas.
+O MCP fornece uma camada padronizada para conectar o AI Workspace Bridge ao ecossistema externo de ferramentas.
 
 Sua função é permitir expansão segura da plataforma mantendo:
 

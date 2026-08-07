@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Bootstrap
 
 ## Objetivo
 
-Este documento define o processo de bootstrap do Media Studio AI.
+Este documento define o processo de bootstrap do AI Workspace Bridge.
 
 O bootstrap tem como objetivo preparar o ambiente inicial da plataforma, garantindo que os componentes fundamentais estejam disponíveis antes do início da implementação dos módulos principais.
 
@@ -319,4 +319,4 @@ O bootstrap é considerado concluído quando:
 
 # Objetivo Final
 
-O bootstrap fornece uma base previsível e reproduzível para o desenvolvimento do Media Studio AI, permitindo que os próximos milestones sejam implementados sobre uma fundação estável.
+O bootstrap fornece uma base previsível e reproduzível para o desenvolvimento do AI Workspace Bridge, permitindo que os próximos milestones sejam implementados sobre uma fundação estável.

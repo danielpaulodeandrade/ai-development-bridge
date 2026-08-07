@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Prompt Engine Architecture
 
 ## 1. Objetivo
 
-Este documento define a arquitetura do Prompt Engine do Media Studio AI.
+Este documento define a arquitetura do Prompt Engine do AI Workspace Bridge.
 
 O objetivo do Prompt Engine é fornecer uma camada responsável pelo gerenciamento, composição e execução de prompts utilizados pelos Agents, Workers e componentes inteligentes da plataforma.
 
@@ -499,4 +499,4 @@ Ele garante:
 - independência de modelos;
 - evolução controlada.
 
-Essa arquitetura permite que o Media Studio AI utilize múltiplos agentes e modelos mantendo controle sobre comportamento e qualidade.
+Essa arquitetura permite que o AI Workspace Bridge utilize múltiplos agentes e modelos mantendo controle sobre comportamento e qualidade.

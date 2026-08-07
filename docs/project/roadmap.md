@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Roadmap
 
 ## Objetivo
 
-Este documento apresenta o roadmap de evolução do Media Studio AI.
+Este documento apresenta o roadmap de evolução do AI Workspace Bridge.
 
 O roadmap define a sequência estratégica de desenvolvimento da plataforma, conectando:
 
@@ -20,7 +20,7 @@ O roadmap representa a direção da V1 e deve ser utilizado como referência par
 
 # Visão Geral
 
-O Media Studio AI será desenvolvido como uma plataforma autônoma de produção de conteúdo multimídia baseada em:
+O AI Workspace Bridge será desenvolvido como uma plataforma autônoma de produção de conteúdo multimídia baseada em:
 
 - Inteligência Artificial;
 - workflows automatizados;
@@ -411,4 +411,4 @@ Toda evolução futura deve passar por análise arquitetural.
 
 # Objetivo Final
 
-O roadmap garante que o Media Studio AI evolua de uma fundação técnica sólida para uma plataforma completa de produção multimídia autônoma.
+O roadmap garante que o AI Workspace Bridge evolua de uma fundação técnica sólida para uma plataforma completa de produção multimídia autônoma.

@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Work Breakdown Structure (WBS)
 
 ## Objetivo
 
-Este documento define a estrutura de decomposição do trabalho do Media Studio AI.
+Este documento define a estrutura de decomposição do trabalho do AI Workspace Bridge.
 
 A WBS organiza o projeto em níveis hierárquicos para facilitar:
 
@@ -21,7 +21,7 @@ A WBS representa a estrutura lógica do projeto e não substitui o gerenciamento
 # Estrutura Geral
 
 ```text
-Media Studio AI V1
+AI Workspace Bridge V1
 
 ├── Milestone 0
 │   └── Product Definition
@@ -55,7 +55,7 @@ Media Studio AI V1
 
 # Nível 1 — Produto
 
-## 0. Media Studio AI V1
+## 0. AI Workspace Bridge V1
 
 Objetivo:
 
@@ -451,4 +451,4 @@ A WBS da V1 está completa quando:
 
 # Objetivo Final
 
-A WBS fornece uma visão estruturada do trabalho necessário para construir o Media Studio AI, permitindo evolução controlada desde a definição do produto até a plataforma completa.
+A WBS fornece uma visão estruturada do trabalho necessário para construir o AI Workspace Bridge, permitindo evolução controlada desde a definição do produto até a plataforma completa.

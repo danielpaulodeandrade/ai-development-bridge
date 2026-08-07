@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Knowledge Architecture
 
 ## 1. Objetivo
 
-Este documento define a arquitetura de conhecimento do Media Studio AI.
+Este documento define a arquitetura de conhecimento do AI Workspace Bridge.
 
 O objetivo é estabelecer como a plataforma coleta, organiza, armazena e recupera informações utilizadas durante o ciclo de produção de conteúdo.
 
@@ -14,7 +14,7 @@ A arquitetura de conhecimento permite que o sistema construa uma base reutilizá
 
 # 2. Visão Geral
 
-O conhecimento no Media Studio AI representa informações estruturadas e não estruturadas utilizadas durante os workflows.
+O conhecimento no AI Workspace Bridge representa informações estruturadas e não estruturadas utilizadas durante os workflows.
 
 A arquitetura permite transformar dados externos em conhecimento reutilizável.
 
@@ -521,4 +521,4 @@ A arquitetura permite evolução para:
 
 A arquitetura de conhecimento fornece a base para transformar pesquisas isoladas em conhecimento reutilizável.
 
-Ela permite que o Media Studio AI evolua de um sistema de geração de conteúdo para uma plataforma capaz de acumular, organizar e utilizar conhecimento continuamente.
+Ela permite que o AI Workspace Bridge evolua de um sistema de geração de conteúdo para uma plataforma capaz de acumular, organizar e utilizar conhecimento continuamente.
