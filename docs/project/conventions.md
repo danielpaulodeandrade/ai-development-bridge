@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Project Conventions
 
 ## Objetivo
 
-Este documento define as convenções utilizadas no desenvolvimento do Media Studio AI.
+Este documento define as convenções utilizadas no desenvolvimento do AI Workspace Bridge.
 
 As convenções têm como objetivo garantir:
 
@@ -464,4 +464,4 @@ Commit
 
 # Objetivo Final
 
-As convenções garantem que o Media Studio AI permaneça organizado, previsível e sustentável durante toda sua evolução.
+As convenções garantem que o AI Workspace Bridge permaneça organizado, previsível e sustentável durante toda sua evolução.

@@ -1,12 +1,12 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Milestones
 
 ## Objetivo
 
-Este documento define as milestones oficiais do Media Studio AI.
+Este documento define as milestones oficiais do AI Workspace Bridge.
 
-As milestones representam grandes entregas evolutivas da plataforma e organizam a implementação da V1.
+As milestones representam grandes entregas evolutivas da plataforma e organizam a implementação da V1 e o avanço para a V2.
 
 Cada milestone possui:
 
@@ -22,7 +22,7 @@ A implementação deve seguir obrigatoriamente a ordem definida neste documento.
 
 # Visão Geral
 
-A V1 do Media Studio AI está organizada nas seguintes milestones:
+A evolução da AI Workspace Bridge está organizada nas seguintes milestones:
 
 ```text
 Milestone 0
@@ -31,42 +31,42 @@ Product Definition
         ↓
 
 Milestone 1
-Foundation & Core Platform
+Foundation
 
         ↓
 
 Milestone 2
-Knowledge & Research
+Context Engine
 
         ↓
 
 Milestone 3
-Editorial & Storytelling
+AI Provider Framework
 
         ↓
 
 Milestone 4
-Asset Pipeline
+Browser Automation
 
         ↓
 
 Milestone 5
-Multimedia Production
+Continue Integration
 
         ↓
 
 Milestone 6
-Content Package
+Multi AI Orchestration
 
         ↓
 
 Milestone 7
-Publishing
+Production Tooling
 
         ↓
 
 Milestone 8
-Analytics & Learning
+Agentic Workflow (AACP)
 ```
 
 ---
@@ -74,349 +74,138 @@ Analytics & Learning
 # Milestone 0 — Product Definition
 
 ## Objetivo
-
-Estabelecer e congelar as definições fundamentais do produto, arquitetura e planejamento da V1.
-
----
+Definir o produto e congelar decisões iniciais.
 
 ## Entregas
-
-Documentação oficial:
-
-```text
-docs/product/
-
-docs/architecture/
-
-docs/project/
-```
-
-Incluindo:
-
-- Project Charter;
-- Requirements;
-- Glossary;
-- Use Cases;
-- Workflows;
-- System Overview;
-- Design Principles;
-- Architecture;
-- Knowledge;
-- Prompt Engine;
-- Workers;
-- Providers;
-- Plugins;
-- MCP;
-- Conventions;
-- Bootstrap;
-- Roadmap;
-- Milestones;
-- WBS.
+- Project Charter
+- Requirements
+- Use Cases
+- Workflows
+- Architecture Overview
+- Implementation Guidelines
+- Roadmap
 
 ---
 
-## Critério de conclusão
-
-Milestone concluída quando:
-
-- documentação aprovada;
-- arquitetura definida;
-- escopo congelado;
-- planejamento criado.
-
----
-
-# Milestone 1 — Foundation & Core Platform
+# Milestone 1 — Foundation
 
 ## Objetivo
-
-Construir a infraestrutura base da plataforma.
-
----
+Criar a infraestrutura base.
 
 ## Entregas
-
-- estrutura definitiva do projeto;
-- Docker;
-- configuração central;
-- sistema de configuração;
-- Workflow Engine;
-- Scheduler;
-- Queue Manager;
-- Project Manager;
-- Provider Framework;
-- Plugin Framework;
-- Skill System;
-- Tool System;
-- MCP Framework;
-- integração com componentes definidos do Aletheia.
+- Configuração central
+- FastAPI
+- Sistema de comandos
+- Workspace Manager
+- Context Collector
+- Output Manager
+- Logging
+- Test Framework
 
 ---
 
-## Resultado esperado
-
-A plataforma possui uma fundação executável e extensível.
-
----
-
-## Dependência
-
-Milestone 0.
-
----
-
-# Milestone 2 — Knowledge & Research
+# Milestone 2 — Context Engine
 
 ## Objetivo
-
-Permitir descoberta, pesquisa e construção de conhecimento reutilizável.
-
----
+Resolver o principal problema: enviar contexto automaticamente.
 
 ## Entregas
+- Scanner de workspace
+- Seleção de arquivos
+- Controle de tamanho de contexto
+- Compressão/resumo
+- Histórico de contexto
+- Export Markdown
 
-- Trend Discovery;
-- Research Workflow;
-- Research Worker;
-- Fact Check Worker;
-- Knowledge Base;
-- Banco de Fontes;
-- Embeddings;
-- RAG;
-- Dossiês estruturados;
-- Cache de pesquisas.
+Exemplo:
+Entrada: `Issue M1-024` -> Saída: `docs/generated/context/M1-024-context.md`
 
 ---
 
-## Resultado esperado
-
-O sistema consegue adquirir e organizar conhecimento.
-
----
-
-## Dependência
-
-Milestone 1.
-
----
-
-# Milestone 3 — Editorial & Storytelling
+# Milestone 3 — AI Provider Framework
 
 ## Objetivo
-
-Transformar conhecimento em histórias e conteúdos estruturados.
-
----
+Criar abstração para qualquer IA.
 
 ## Entregas
-
-- Editorial Worker;
-- Story Worker;
-- Hook Generator;
-- Outline Generator;
-- Script Generator;
-- CTA Generator;
-- Templates editoriais;
-- Perfis de plataforma.
+- `providers/base.py`, `chatgpt.py`, `gemini.py`, `claude.py`, `adapta.py`, `local.py`
+- Capacidade de enviar prompt, anexar contexto, receber resposta e salvar resultado.
 
 ---
 
-## Resultado esperado
-
-O sistema consegue produzir roteiros adaptados.
-
----
-
-## Dependência
-
-Milestone 2.
-
----
-
-# Milestone 4 — Asset Pipeline
+# Milestone 4 — Browser Automation
 
 ## Objetivo
-
-Obter, organizar e validar recursos multimídia.
-
----
+Controlar interfaces web.
 
 ## Entregas
-
-- busca em bibliotecas livres;
-- download;
-- organização automática;
-- catalogação;
-- Prompt Generator;
-- Image Generation;
-- Asset Validator;
-- Asset Cache.
+- Browser Manager
+- Session Manager
+- Playwright
+- Perfil persistente
+- Upload de arquivos
+- Captura Markdown
 
 ---
 
-## Resultado esperado
-
-Assets disponíveis para produção.
-
----
-
-## Dependência
-
-Milestone 3.
-
----
-
-# Milestone 5 — Multimedia Production
+# Milestone 5 — Continue Integration
 
 ## Objetivo
-
-Produzir automaticamente vídeos completos.
-
----
+Integrar ao VS Code.
 
 ## Entregas
-
-- Storyboard;
-- Timeline;
-- Narração sincronizada;
-- Legendas;
-- Transições;
-- Motion;
-- Renderização;
-- Exportação;
-- Pacote Master.
+- Bridge API para interagir nativamente com as requisições da IDE.
 
 ---
 
-## Resultado esperado
-
-O sistema gera conteúdo audiovisual completo.
-
----
-
-## Dependência
-
-Milestone 4.
-
----
-
-# Milestone 6 — Content Package
+# Milestone 6 — Multi AI Orchestration
 
 ## Objetivo
-
-Transformar um vídeo em um pacote multiplataforma.
-
----
+Permitir papéis.
 
 ## Entregas
-
-Plataformas:
-
-- YouTube;
-- Shorts;
-- TikTok;
-- Instagram;
-- Facebook;
-- Snapchat.
-
-Recursos:
-
-- Community Post;
-- Thumbnail;
-- Descrição;
-- Tags;
-- Hashtags;
-- SEO;
-- Chapters.
+- `@architect` -> ChatGPT
+- `@coder` -> Claude
+- `@reviewer` -> Gemini
 
 ---
 
-## Resultado esperado
-
-Conteúdo pronto para distribuição.
-
----
-
-## Dependência
-
-Milestone 5.
-
----
-
-# Milestone 7 — Publishing
+# Milestone 7 — Production Tooling
 
 ## Objetivo
-
-Preparar e executar a distribuição do conteúdo.
-
----
+Transformar em ferramenta madura.
 
 ## Entregas
-
-- estrutura de publicação;
-- metadata;
-- manifest;
-- agendamento;
-- publicação manual assistida;
-- publicação automática quando APIs estiverem disponíveis;
-- logs de publicação.
-
----
-
-## Resultado esperado
-
-Fluxo de publicação controlado.
+- CLI
+- Templates
+- Profiles
+- Configuração YAML
+- Logs
+- Histórico
+- Cache
 
 ---
 
-## Dependência
-
-Milestone 6.
-
----
-
-# Milestone 8 — Analytics & Learning
+# Milestone 8 — Agentic Workflow (AACP)
 
 ## Objetivo
-
-Fechar o ciclo de melhoria contínua.
-
----
+Evolução para a V2: Transformar a Bridge em um agente autônomo.
 
 ## Entregas
-
-- banco de métricas;
-- dashboard inicial;
-- relatórios;
-- CTR;
-- retenção;
-- Watch Time;
-- histórico;
-- Learning Worker;
-- sugestões para próximos conteúdos.
-
----
-
-## Resultado esperado
-
-O sistema aprende com os resultados obtidos e melhora futuras produções.
-
----
-
-## Dependência
-
-Milestone 7.
+- AACP Protocol (File I/O, OS Commands).
+- AACP Parser (Expressões Regulares).
+- File Executor.
+- Shell Executor com Prompt Interativo (Autorização).
+- Mutação de Resposta e Injeção no Main.
 
 ---
 
 # Regras das Milestones
 
 ## Ordem obrigatória
-
 Milestones devem ser executadas sequencialmente.
 
 Não é permitido:
-
 - iniciar uma milestone futura;
 - criar dependências antecipadas;
 - implementar funcionalidades fora do escopo atual.
@@ -424,9 +213,7 @@ Não é permitido:
 ---
 
 ## Controle de Escopo
-
 Cada milestone deve conter apenas:
-
 - funcionalidades previstas;
 - componentes documentados;
 - entregas aprovadas.
@@ -436,17 +223,9 @@ Alterações de escopo devem gerar revisão da documentação.
 ---
 
 ## Critério Geral de Conclusão
-
 Uma milestone é considerada concluída quando:
-
 - todas as Issues relacionadas foram finalizadas;
 - testes foram executados;
 - documentação permanece consistente;
 - arquitetura foi preservada;
 - validação foi realizada.
-
----
-
-# Objetivo Final
-
-As milestones organizam a construção progressiva do Media Studio AI, garantindo uma evolução controlada desde a definição do produto até uma plataforma autônoma de produção multimídia.

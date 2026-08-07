@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Implementation Guidelines
 
 ## Objetivo
 
-Este documento define as diretrizes obrigatórias para implementação do Media Studio AI.
+Este documento define as diretrizes obrigatórias para implementação do AI Workspace Bridge.
 
 O objetivo é garantir que todas as alterações realizadas no projeto mantenham:
 
@@ -341,4 +341,4 @@ Primeiro:
 3. solicitar decisão;
 4. somente então alterar código.
 
-O objetivo é preservar a integridade técnica do Media Studio AI durante toda sua evolução.
+O objetivo é preservar a integridade técnica do AI Workspace Bridge durante toda sua evolução.
