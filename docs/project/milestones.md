@@ -375,31 +375,26 @@ Milestone 6.
 
 ---
 
-# Milestone 8 — Analytics & Learning
+# Milestone 8 — Agentic Workflow (AACP)
 
 ## Objetivo
 
-Fechar o ciclo de melhoria contínua.
+Transformar a Bridge em um nó executor de comandos autônomos baseado no Aletheia Agent Communication Protocol (AACP).
 
 ---
 
 ## Entregas
 
-- banco de métricas;
-- dashboard inicial;
-- relatórios;
-- CTR;
-- retenção;
-- Watch Time;
-- histórico;
-- Learning Worker;
-- sugestões para próximos conteúdos.
+- AACP Parser (Regex Engine);
+- File Executor (os, shutil);
+- Shell Executor com prompt interativo de autorização;
+- Mutação de Response (remoção de tags brutas e injeção de Markdown amigável).
 
 ---
 
 ## Resultado esperado
 
-O sistema aprende com os resultados obtidos e melhora futuras produções.
+O sistema intercepta tags de AACP e executa manipulação de arquivos localmente.
 
 ---
 
