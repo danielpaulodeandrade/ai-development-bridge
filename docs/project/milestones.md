@@ -31,37 +31,37 @@ Product Definition
         ↓
 
 Milestone 1
-Foundation & Local API
+Foundation
 
         ↓
 
 Milestone 2
-Browser Integration (Playwright)
+Context Engine
 
         ↓
 
 Milestone 3
-TextFeeder (Injeção de Prompts)
+AI Provider Framework
 
         ↓
 
 Milestone 4
-ClipboardExtractor (Extração de Respostas)
+Browser Automation
 
         ↓
 
 Milestone 5
-Prompt Routing & Registry
+Continue Integration
 
         ↓
 
 Milestone 6
-Configuration System (YAML)
+Multi AI Orchestration
 
         ↓
 
 Milestone 7
-Stability & V1 Conclusion
+Production Tooling
 
         ↓
 
@@ -74,101 +74,129 @@ Agentic Workflow (AACP)
 # Milestone 0 — Product Definition
 
 ## Objetivo
-Estabelecer e congelar as definições fundamentais do produto, arquitetura e planejamento.
+Definir o produto e congelar decisões iniciais.
 
 ## Entregas
-Documentação oficial (Project Charter, Requirements, Architecture, Glossary, etc).
+- Project Charter
+- Requirements
+- Use Cases
+- Workflows
+- Architecture Overview
+- Implementation Guidelines
+- Roadmap
 
 ---
 
-# Milestone 1 — Foundation & Local API
+# Milestone 1 — Foundation
 
 ## Objetivo
-Estabelecer o servidor local (FastAPI) rodando na porta 8000 para interceptar o fluxo da IDE.
+Criar a infraestrutura base.
 
 ## Entregas
-- `main.py` com rotas REST.
-- Simulação do `/v1/chat/completions`.
+- Configuração central
+- FastAPI
+- Sistema de comandos
+- Workspace Manager
+- Context Collector
+- Output Manager
+- Logging
+- Test Framework
 
 ---
 
-# Milestone 2 — Browser Integration (Playwright)
+# Milestone 2 — Context Engine
 
 ## Objetivo
-Conectar o servidor Python a um navegador Chromium persistente.
+Resolver o principal problema: enviar contexto automaticamente.
 
 ## Entregas
-- `BrowserDaemon` como Singleton.
-- Controle de abas via CDP.
+- Scanner de workspace
+- Seleção de arquivos
+- Controle de tamanho de contexto
+- Compressão/resumo
+- Histórico de contexto
+- Export Markdown
+
+Exemplo:
+Entrada: `Issue M1-024` -> Saída: `docs/generated/context/M1-024-context.md`
 
 ---
 
-# Milestone 3 — TextFeeder
+# Milestone 3 — AI Provider Framework
 
 ## Objetivo
-Injetar automaticamente os prompts oriundos da IDE dentro do DOM ou campo de texto do provedor de IA.
+Criar abstração para qualquer IA.
 
 ## Entregas
-- Localização de inputs dinâmicos em diferentes IAs.
-- Injeção de texto segura.
+- `providers/base.py`, `chatgpt.py`, `gemini.py`, `claude.py`, `adapta.py`, `local.py`
+- Capacidade de enviar prompt, anexar contexto, receber resposta e salvar resultado.
 
 ---
 
-# Milestone 4 — ClipboardExtractor
+# Milestone 4 — Browser Automation
 
 ## Objetivo
-Burlar limitações de Shadow DOM e bloqueios de extração lendo diretamente o clipboard da máquina física após comando Ctrl+C.
+Controlar interfaces web.
 
 ## Entregas
-- Automação de teclado para selecionar texto e copiar.
-- Leitura do clipboard via OS.
+- Browser Manager
+- Session Manager
+- Playwright
+- Perfil persistente
+- Upload de arquivos
+- Captura Markdown
 
 ---
 
-# Milestone 5 — Prompt Routing & Registry
+# Milestone 5 — Continue Integration
 
 ## Objetivo
-Roteamento inteligente de prompts para diferentes serviços (ChatGPT, Claude, Gemini) usando tags.
+Integrar ao VS Code.
 
 ## Entregas
-- Sistema de Registry.
-- Leitura de tags `!gpt`, `!claude`.
+- Bridge API para interagir nativamente com as requisições da IDE.
 
 ---
 
-# Milestone 6 — Configuration System
+# Milestone 6 — Multi AI Orchestration
 
 ## Objetivo
-Parametrizar a Bridge sem hardcode, através de arquivos externos.
+Permitir papéis.
 
 ## Entregas
-- Leitura de `config.yaml`.
-- Classe `Settings` (Singleton).
+- `@architect` -> ChatGPT
+- `@coder` -> Claude
+- `@reviewer` -> Gemini
 
 ---
 
-# Milestone 7 — Stability & V1 Conclusion
+# Milestone 7 — Production Tooling
 
 ## Objetivo
-Refatoração, testes integrados, tratamento de falhas e congelamento da V1.
+Transformar em ferramenta madura.
 
 ## Entregas
-- Fechamento da V1.
-- Documentação sincronizada.
+- CLI
+- Templates
+- Profiles
+- Configuração YAML
+- Logs
+- Histórico
+- Cache
 
 ---
 
 # Milestone 8 — Agentic Workflow (AACP)
 
 ## Objetivo
-Transformar a Bridge de um "Proxy Passivo" para um "Executor Ativo", permitindo que a IA altere o Workspace (criação de arquivos, edição, execução de shell).
+Evolução para a V2: Transformar a Bridge em um agente autônomo.
 
 ## Entregas
-- Resolução de Workdir.
-- AACP Parser (RegEx).
+- AACP Protocol (File I/O, OS Commands).
+- AACP Parser (Expressões Regulares).
 - File Executor.
-- Shell Executor com interceptação interativa (Autorização).
-- Mutação de Response devolvida à IDE.
+- Shell Executor com Prompt Interativo (Autorização).
+- Mutação de Resposta e Injeção no Main.
 
 ---
 
