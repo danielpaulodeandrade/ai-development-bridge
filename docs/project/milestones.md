@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Milestones
 
 ## Objetivo
 
-Este documento define as milestones oficiais do Media Studio AI.
+Este documento define as milestones oficiais do AI Workspace Bridge.
 
 As milestones representam grandes entregas evolutivas da plataforma e organizam a implementação da V1.
 
@@ -22,7 +22,7 @@ A implementação deve seguir obrigatoriamente a ordem definida neste documento.
 
 # Visão Geral
 
-A V1 do Media Studio AI está organizada nas seguintes milestones:
+A V1 do AI Workspace Bridge está organizada nas seguintes milestones:
 
 ```text
 Milestone 0
@@ -449,4 +449,4 @@ Uma milestone é considerada concluída quando:
 
 # Objetivo Final
 
-As milestones organizam a construção progressiva do Media Studio AI, garantindo uma evolução controlada desde a definição do produto até uma plataforma autônoma de produção multimídia.
+As milestones organizam a construção progressiva do AI Workspace Bridge, garantindo uma evolução controlada desde a definição do produto até uma plataforma autônoma de produção multimídia.

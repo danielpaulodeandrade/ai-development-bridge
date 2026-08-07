@@ -1,10 +1,10 @@
-# Media Studio AI
+# AI Workspace Bridge
 
 # Development Workflow
 
 ## Objetivo
 
-Este documento define o fluxo oficial de desenvolvimento do Media Studio AI.
+Este documento define o fluxo oficial de desenvolvimento do AI Workspace Bridge.
 
 Seu objetivo é garantir que a implementação da plataforma siga a arquitetura aprovada, respeite as decisões congeladas da V1 e mantenha consistência entre documentação, código e evolução do projeto.
 
@@ -294,4 +294,4 @@ Durante todo o desenvolvimento:
 
 # Objetivo Final
 
-O workflow existe para garantir que o Media Studio AI evolua como uma plataforma consistente, modular e sustentável, mantendo alinhamento entre visão do produto, arquitetura e implementação.
+O workflow existe para garantir que o AI Workspace Bridge evolua como uma plataforma consistente, modular e sustentável, mantendo alinhamento entre visão do produto, arquitetura e implementação.

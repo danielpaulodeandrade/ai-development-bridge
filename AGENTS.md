@@ -1,6 +1,6 @@
 # AGENTS.md
 
-# Media Studio AI — AI Development Manual
+# AI Workspace Bridge — AI Development Manual
 
 Version: 2.0
 
@@ -8,7 +8,7 @@ Version: 2.0
 
 # 1. Purpose
 
-This document defines the mandatory operational behavior for every AI agent working on the Media Studio AI project.
+This document defines the mandatory operational behavior for every AI agent working on the AI Workspace Bridge project.
 
 It applies to:
 
@@ -32,7 +32,7 @@ The official documentation remains the single source of truth.
 
 Your mission is not simply to generate code.
 
-Your responsibility is to preserve the integrity of the Media Studio AI project during its entire lifecycle.
+Your responsibility is to preserve the integrity of the AI Workspace Bridge project during its entire lifecycle.
 
 Every implementation must prioritize:
 
@@ -49,7 +49,7 @@ Always think as a Senior Software Engineer responsible for the complete platform
 
 # 3. Project Overview
 
-Media Studio AI is an autonomous multimedia production platform.
+AI Workspace Bridge is an autonomous multimedia production platform.
 
 Its objective is transforming a single idea into a complete multi-platform content package using AI-driven workflows.
 
@@ -416,7 +416,7 @@ Before writing any code, every agent must internally confirm:
 
 "I understand the implementation scope."
 
-"I will preserve the integrity of the Media Studio AI project."
+"I will preserve the integrity of the AI Workspace Bridge project."
 
 Only then should implementation begin.
 
@@ -1173,7 +1173,7 @@ Review is a mandatory phase of every implementation.
 
 Its objective is not to find syntax errors.
 
-Its objective is to verify that the implementation remains consistent with the Media Studio AI architecture and documentation.
+Its objective is to verify that the implementation remains consistent with the AI Workspace Bridge architecture and documentation.
 
 Implementation without review is incomplete.
 
@@ -1566,7 +1566,7 @@ Quality always takes precedence over speed.
 
 # 87. Multi-Agent Philosophy
 
-Media Studio AI is designed to be developed with AI assistance.
+AI Workspace Bridge is designed to be developed with AI assistance.
 
 Different agents may participate in the same implementation.
 
@@ -1880,7 +1880,7 @@ Every implementation must remain traceable.
 
 # 104. Long-Term Vision
 
-Media Studio AI is expected to evolve over multiple versions.
+AI Workspace Bridge is expected to evolve over multiple versions.
 
 Every implementation should preserve future maintainability.
 
@@ -1943,7 +1943,7 @@ Do not modify architecture without approval.
 
 # 108. Engineering Commitment
 
-Every AI agent working on Media Studio AI commits to the following principles:
+Every AI agent working on AI Workspace Bridge commits to the following principles:
 
 - Documentation First
 - Architecture Preservation
@@ -1970,7 +1970,7 @@ Before closing any issue, the agent should be able to truthfully state:
 
 "I validated the implementation."
 
-"I preserved the long-term maintainability of the Media Studio AI project."
+"I preserved the long-term maintainability of the AI Workspace Bridge project."
 
 Only then should the issue be considered complete.
 

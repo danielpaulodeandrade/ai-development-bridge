@@ -267,6 +267,6 @@ Todo agente deve:
 
 # Escopo
 
-Este documento não altera o comportamento funcional do Media Studio AI.
+Este documento não altera o comportamento funcional do AI Workspace Bridge.
 
 Seu único objetivo é orientar o processo de implementação da V1 e garantir consistência entre desenvolvedores e agentes de IA.

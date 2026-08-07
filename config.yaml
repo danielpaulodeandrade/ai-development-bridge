@@ -13,3 +13,6 @@ router:
     gemini: "gemini"
     claude: "claude"
     deepseek: "deepseek"
+
+agent:
+  workspace_dir: ""
