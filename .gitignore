@@ -25,3 +25,6 @@ dist/
 # Logs
 logs/
 .browser_profile/
+
+# Backups
+*.bak
