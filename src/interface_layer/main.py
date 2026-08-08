@@ -11,6 +11,11 @@ from src.browser_automation.clipboard_extractor import ClipboardExtractor
 from src.config import settings
 from src.history import history_logger
 
+from src.agent.parser import AACPParser
+from src.agent.models import ActionType, FileAction, RunAction
+from src.agent.file_executor import FileExecutor
+from src.agent.shell_executor import ShellExecutor
+
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
@@ -138,6 +143,22 @@ async def chat_completions(req: ChatCompletionRequest):
     
     if not response_text:
         response_text = "Falha ao extrair a resposta do navegador. Verifique a aba e o self-healing."
+        
+    # --- AACP Mutation ---
+    actions = AACPParser.parse(response_text)
+    for action in actions:
+        result_msg = ""
+        if isinstance(action, FileAction):
+            logger.info(f"Executando FileAction: {action.action_type.value}")
+            result_msg = FileExecutor.execute(action)
+        elif isinstance(action, RunAction):
+            logger.info("A mutação de resposta está aguardando o fim do comando shell...")
+            result_msg = ShellExecutor.execute(action)
+            
+        # Formatar a mensagem amigável de saída
+        badge = f"\n> **Agent Execution:**\n> ```text\n> {result_msg}\n> ```\n"
+        response_text = response_text.replace(action.original_match, badge)
+    # -----------------------
         
     # Salvar no histórico
     history_logger.log_interaction(platform, prompt, response_text)
