@@ -9,6 +9,7 @@ Ideal para plugar na extensão **Continue** do VS Code ou em qualquer outra IDE,
 - 🤖 **Daemon Resiliente (Playwright Nativo):** Mantém a sessão ativa usando o Microsoft Edge ou Google Chrome da sua máquina para máxima performance (você só loga uma vez).
 - ⚙️ **Configurável via YAML:** Porta, fallback, chaves e perfis isolados no arquivo `config.yaml`.
 - 📝 **Advanced Logging:** Salva o histórico de execução e de sessões de conversa (em `logs/history.jsonl`).
+- 🤖 **Agentic Workflow (AACP v1.0):** Execução autônoma de arquivos e comandos locais direto do chat. (Milestone 8)
 
 ## Instalação
 
@@ -73,3 +74,58 @@ Você pode usar tanto o símbolo `!` quanto o `@` (recomendamos o `!` para não 
 - `!gemini ...` -> Envia para o Gemini
 
 *A Bridge possui fallbacks robustos para lidar com editores rich-text e extrai as respostas silenciosamente, garantindo a privacidade das suas sessões.*
+
+## 🤖 Agentic Workflow (AACP v1.0)
+
+A Bridge evoluiu para operar como um **Agente Autônomo** através do protocolo AACP (Aletheia Agent Communication Protocol). Isso significa que as IAs hospedadas na web (ChatGPT, Gemini, etc) podem **criar e alterar arquivos** na sua máquina, além de rodar comandos no seu terminal, sem que você precise copiar e colar nada!
+
+### Como ativar o AACP no seu ChatGPT / Gemini
+
+Para que o modelo entenda que ele tem acesso ao seu computador pela Bridge, você deve configurar as **Instruções Personalizadas** dele (ou colocar como prompt de sistema no "Project" do GPT). 
+
+Copie e cole o texto abaixo no perfil do seu agente:
+
+```text
+# AACP v1.0
+
+Este projeto utiliza o Aletheia Agent Communication Protocol (AACP).
+
+Sempre que sua resposta envolver qualquer ação sobre arquivos ou diretórios, utilize obrigatoriamente o protocolo abaixo.
+
+Comandos permitidos:
+
+<<<FILE_CREATE:path>>>
+conteúdo
+<<<END_FILE>>>
+
+<<<FILE_REPLACE:path>>>
+conteúdo
+<<<END_FILE>>>
+
+<<<FILE_PATCH:path>>>
+patch
+<<<END_PATCH>>>
+
+<<<DELETE_FILE:path>>>
+
+<<<MOVE_FILE:origem|destino>>>
+
+<<<MKDIR:path>>>
+
+<<<RUN>>>
+comando
+<<<END>>>
+
+Regras:
+
+- Nunca invente novos comandos.
+- Nunca altere a sintaxe.
+- Preserve exatamente os delimitadores <<< >>>.
+- Todo conteúdo deve estar entre BEGIN e END correspondentes.
+- Fora das tags, responda normalmente.
+```
+
+### Funcionalidades de Segurança
+- **Anti Path-Traversal:** A Bridge intercepta qualquer comando e impede edições fora do diretório do seu workspace.
+- **Auto-Backup:** Sempre que um arquivo é sobrescrito, um `.bak` é gerado instantaneamente (você não perde código).
+- **Human-in-the-Loop:** Criações de arquivos são silenciosas, mas **qualquer** comando `<<<RUN>>>` no shell vai pausar e exigir a sua aprovação `[s/N]` diretamente no log do servidor antes de ser executado!

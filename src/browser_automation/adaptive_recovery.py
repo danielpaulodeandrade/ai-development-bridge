@@ -52,8 +52,8 @@ class AdaptiveRecovery:
         
         try:
             # Pega árvore de acessibilidade para poupar tokens drásticamente
-            snapshot = await page.accessibility.snapshot()
-            tree_str = json.dumps(snapshot, indent=2)[:10000] # Proteção de limite de contexto do Groq
+            snapshot = await page.aria_snapshot()
+            tree_str = snapshot[:10000] # Proteção de limite de contexto do Groq
             
             prompt = f"""Você é um bot autônomo de recuperação de interface (Self-Healing). 
 A interface do {platform} atualizou e nosso automador Playwright quebrou.
@@ -70,7 +70,7 @@ Accessibility Tree:
 {tree_str}"""
             
             msg = ProviderMessage(role="user", content=prompt)
-            resp = await self.fallback.generate([msg])
+            resp = self.fallback.send_prompt([msg])
             
             # Limpa resposta do LLM caso venha com formatação markdown acidental
             new_selector = resp.content.strip().replace("```css", "").replace("```html", "").replace("```", "").strip()

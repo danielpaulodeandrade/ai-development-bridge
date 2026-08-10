@@ -120,7 +120,7 @@ async def chat_completions(req: ChatCompletionRequest):
     URLS = {
         "gemini": "https://gemini.google.com",
         "chatgpt": "https://chatgpt.com",
-        "claude": "https://claude.ai/new",
+        "claude": "https://claude.ai",
         "deepseek": "https://chat.deepseek.com"
     }
     
