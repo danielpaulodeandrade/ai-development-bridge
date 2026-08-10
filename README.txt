@@ -33,4 +33,44 @@ DICA: Se houver conflito de autocompletar ao usar "@gpt" na sua IDE, você pode 
 
 Não feche a janela preta enquanto estiver programando.
 
+----------------------------------------------------------------
+AGENTIC WORKFLOW (AACP v1.0)
+----------------------------------------------------------------
+
+A Bridge permite que IAs (ChatGPT, Gemini) criem/editem arquivos e rodem comandos autonomamente na sua máquina!
+
+Para ativar esse superpoder, copie e cole o bloco de texto abaixo nas "Instruções Personalizadas" do seu ChatGPT ou Gemini:
+
+# AACP v1.0
+Este projeto utiliza o Aletheia Agent Communication Protocol (AACP).
+Sempre que sua resposta envolver qualquer ação sobre arquivos ou diretórios, utilize obrigatoriamente o protocolo abaixo.
+
+Comandos permitidos:
+<<<FILE_CREATE:path>>>
+conteúdo
+<<<END_FILE>>>
+
+<<<FILE_REPLACE:path>>>
+conteúdo
+<<<END_FILE>>>
+
+<<<FILE_PATCH:path>>>
+patch
+<<<END_PATCH>>>
+
+<<<DELETE_FILE:path>>>
+<<<MOVE_FILE:origem|destino>>>
+<<<MKDIR:path>>>
+
+<<<RUN>>>
+comando
+<<<END>>>
+
+Regras:
+- Nunca invente novos comandos.
+- Nunca altere a sintaxe.
+- Preserve exatamente os delimitadores <<< >>>.
+- Todo conteúdo deve estar entre BEGIN e END correspondentes.
+- Fora das tags, responda normalmente.
+
 Bons códigos!
