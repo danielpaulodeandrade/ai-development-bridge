@@ -12,13 +12,17 @@ class TextFeeder:
     """
     
     SELECTORS = {
+        "gpt": {
+            "input": "#prompt-textarea, #mobile-composer-prompt", 
+            "submit": "button[data-testid='send-button'], button[data-composer-submit]"
+        },
         "gemini": {
             "input": ".ql-editor, rich-textarea", 
             "submit": "button[aria-label='Send message'], .send-button"
         },
         "chatgpt": {
-            "input": "#prompt-textarea", 
-            "submit": "button[data-testid='send-button']"
+            "input": "#prompt-textarea, #mobile-composer-prompt", 
+            "submit": "button[data-testid='send-button'], button[data-composer-submit]"
         },
         "claude": {
             "input": "div[contenteditable='true']", 
@@ -27,6 +31,26 @@ class TextFeeder:
         "deepseek": {
             "input": "textarea[placeholder*='DeepSeek'], textarea[name='search']", 
             "submit": "div.ds-button--primary"
+        },
+        "qwen": {
+            "input": "textarea.message-input-textarea",
+            "submit": "button.send-button"
+        },
+        "kimi": {
+            "input": "div.chat-input-editor",
+            "submit": "div.send-button-container"
+        },
+        "deepai": {
+            "input": "textarea#persistentChatbox, textarea.chatbox",
+            "submit": "button#chatSubmitButton"
+        },
+        "grok": {
+            "input": "div[contenteditable='true'], .ProseMirror",
+            "submit": "Enter"
+        },
+        "chatx": {
+            "input": "textarea#prompt",
+            "submit": "button#sendchat_btn"
         }
     }
 
@@ -108,9 +132,17 @@ class TextFeeder:
                 await input_el.wait_for(state="visible", timeout=10000)
                 await self._fill_input(page, input_el, prompt)
                 
-                btn = page.locator(selectors["submit"]).first
-                await btn.wait_for(state="visible", timeout=5000)
-                await btn.click()
+                submit_selector = selectors.get("submit")
+                if submit_selector == "Enter":
+                    await input_el.press("Enter")
+                else:
+                    btn = page.locator(submit_selector).first
+                    try:
+                        await btn.wait_for(state="visible", timeout=5000)
+                        await btn.click()
+                    except Exception as btn_err:
+                        logger.debug(f"Botão de submit não funcionou ({btn_err}). Tentando fallback com Enter.")
+                        await input_el.press("Enter")
                 
                 if idx < total:
                     await self._wait_for_ai_ready(page)
@@ -137,9 +169,17 @@ class TextFeeder:
             await input_el.wait_for(state="visible", timeout=10000)
             await self._fill_input(page, input_el, prompt)
             
-            btn = page.locator(selectors["submit"]).first
-            await btn.wait_for(state="visible", timeout=5000)
-            await btn.click()
+            submit_selector = selectors.get("submit")
+            if submit_selector == "Enter":
+                await input_el.press("Enter")
+            else:
+                btn = page.locator(submit_selector).first
+                try:
+                    await btn.wait_for(state="visible", timeout=5000)
+                    await btn.click()
+                except Exception as btn_err:
+                    logger.debug(f"Botão de submit não funcionou ({btn_err}). Tentando fallback com Enter.")
+                    await input_el.press("Enter")
             
             await self._wait_for_ai_ready(page)
             return True

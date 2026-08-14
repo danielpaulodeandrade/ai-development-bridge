@@ -25,6 +25,7 @@ PyInstaller.__main__.run([
     '--hidden-import=uvicorn',
     '--hidden-import=fastapi',
     '--hidden-import=sse_starlette',
+    '--hidden-import=dotenv',
     '--hidden-import=src.interface_layer.main',
 ])
 

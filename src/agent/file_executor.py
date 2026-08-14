@@ -7,12 +7,13 @@ class FileExecutor:
     """Executa ações de arquivo lidas pelo AACPParser com proteções de segurança"""
 
     @staticmethod
-    def _sanitize_path(relative_path: str) -> str:
+    def _sanitize_path(relative_path: str, dynamic_workspace: str = None) -> str:
         """
         Garante que o caminho do arquivo não escape do diretório do workspace 
         (Prevenção de Path Traversal).
         """
-        base_dir = os.path.abspath(Settings().get_workspace_dir())
+        base = dynamic_workspace if dynamic_workspace else Settings().get_workspace_dir()
+        base_dir = os.path.abspath(base)
         
         # Remove barras iniciais para garantir que os.path.join funcione corretamente
         clean_relative = relative_path.lstrip("\\/")
@@ -25,12 +26,12 @@ class FileExecutor:
         return target_path
 
     @classmethod
-    def execute(cls, action: FileAction) -> str:
+    def execute(cls, action: FileAction, dynamic_workspace: str = None) -> str:
         """
         Recebe uma FileAction e a executa com segurança, retornando uma mensagem de sucesso
         """
         try:
-            target_path = cls._sanitize_path(action.path)
+            target_path = cls._sanitize_path(action.path, dynamic_workspace)
             
             if action.action_type == ActionType.FILE_CREATE:
                 return cls._create_file(target_path, action.content)
@@ -42,7 +43,7 @@ class FileExecutor:
                 return cls._delete_file(target_path)
                 
             elif action.action_type == ActionType.MOVE_FILE:
-                destination = cls._sanitize_path(action.destination_path)
+                destination = cls._sanitize_path(action.destination_path, dynamic_workspace)
                 return cls._move_file(target_path, destination)
                 
             elif action.action_type == ActionType.MKDIR:
