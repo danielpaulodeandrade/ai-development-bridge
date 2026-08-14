@@ -8,6 +8,7 @@ from .dom_parser import (
     DeepseekDOMParser, QwenDOMParser, KimiDOMParser,
     DeepAIDOMParser, GrokDOMParser, ChatXDOMParser
 )
+from src.agent.hot_reloader import HotReloader
 
 logger = logging.getLogger(__name__)
 
@@ -130,3 +131,15 @@ class DOMStreamer:
             
         if stable_count < 15:
             logger.warning(f"DOMStreamer: Timeout de {timeout_ms}ms atingido antes da estabilização.")
+
+        if not last_markdown:
+            logger.error(f"Extração falhou completamente para {platform}. Disparando Self-Healing...")
+            from .self_healing import SelfHealingEngine
+            healer = SelfHealingEngine(self.daemon)
+            healed = await healer.initiate_healing(platform, selector)
+            if healed:
+                HotReloader.reload_browser_automation()
+                logger.info("Self-healing concluído. Sugere-se tentar o prompt novamente.")
+                yield "\n\n> 🛠️ **Bridge Self-Healing System:** Detectei uma mudança na interface do site, mas consegui me consertar! Por favor, mande sua mensagem novamente."
+            else:
+                yield "\n\n> ❌ **Bridge Self-Healing System:** Falhei ao extrair a resposta e não consegui me consertar. Verifique os logs."
