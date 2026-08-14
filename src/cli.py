@@ -17,33 +17,33 @@ def auto_scaffold():
     """Extracts default configuration files if running as a PyInstaller executable and not present."""
     if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
         base_path = sys._MEIPASS
-        cwd = os.getcwd()
+        exe_dir = os.path.dirname(sys.executable)
         
         needs_install = False
         
         # Scaffolding .env
-        env_dest = os.path.join(cwd, '.env')
+        env_dest = os.path.join(exe_dir, '.env')
         if not os.path.exists(env_dest):
             import shutil
             shutil.copy(os.path.join(base_path, '.env.example'), env_dest)
             needs_install = True
             
         # Scaffolding config.yaml
-        cfg_dest = os.path.join(cwd, 'config.yaml')
+        cfg_dest = os.path.join(exe_dir, 'config.yaml')
         if not os.path.exists(cfg_dest):
             import shutil
             shutil.copy(os.path.join(base_path, 'config.yaml'), cfg_dest)
             needs_install = True
             
         # Scaffolding README.txt
-        readme_dest = os.path.join(cwd, 'README.txt')
+        readme_dest = os.path.join(exe_dir, 'README.txt')
         if not os.path.exists(readme_dest):
             import shutil
             shutil.copy(os.path.join(base_path, 'README.txt'), readme_dest)
             needs_install = True
             
         # Scaffolding .continue
-        cont_dest = os.path.join(cwd, '.continue')
+        cont_dest = os.path.join(exe_dir, '.continue')
         if not os.path.exists(cont_dest):
             import shutil
             shutil.copytree(os.path.join(base_path, '.continue'), cont_dest, dirs_exist_ok=True)
@@ -52,13 +52,22 @@ def auto_scaffold():
         if needs_install:
             print("\n============================================================")
             print(" AI Workspace Bridge Standalone Inicializado com Sucesso.")
-            print(" Criando ambiente isolado (.env, .continue, config.yaml).")
+            print(f" Criando ambiente isolado (.env, .continue, config.yaml) em: {exe_dir}")
             print("============================================================\n")
 
 
 def main():
     # Scaffold if PyInstaller executable
     auto_scaffold()
+    
+    if getattr(sys, 'frozen', False):
+        try:
+            from dotenv import load_dotenv
+            exe_env = os.path.join(os.path.dirname(sys.executable), '.env')
+            if os.path.exists(exe_env):
+                load_dotenv(exe_env)
+        except ImportError:
+            pass
     
     parser = argparse.ArgumentParser(description="AI Workspace Bridge CLI")
     subparsers = parser.add_subparsers(dest="command", help="Comandos disponíveis")
