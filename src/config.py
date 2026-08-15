@@ -16,7 +16,7 @@ class Settings:
     def _get_base_dir(self):
         import sys
         if getattr(sys, 'frozen', False):
-            return os.getcwd()
+            return os.path.dirname(sys.executable)
         return os.path.dirname(os.path.dirname(__file__))
 
     def _load_config(self):
@@ -74,7 +74,7 @@ settings = Settings()
 def setup_logging():
     import sys
     if getattr(sys, 'frozen', False):
-        base_dir = os.getcwd()
+        base_dir = os.path.dirname(sys.executable)
     else:
         base_dir = os.path.dirname(os.path.dirname(__file__))
         

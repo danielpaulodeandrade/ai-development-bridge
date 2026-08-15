@@ -229,3 +229,16 @@ Uma milestone é considerada concluída quando:
 - documentação permanece consistente;
 - arquitetura foi preservada;
 - validação foi realizada.
+
+---
+
+# Milestone 9 - Self-Healing Engine (Dogfooding)
+
+## Objetivo
+Evolucao para a V2: Tornar a Bridge auto-atualizavel para quebra de seletores no DOM (Mudancas de interface do ChatGPT/Gemini/etc).
+
+## Entregas
+- Modulo de Self-Healing (coleta de HTML cru em caso de falha de parsing).
+- Motor de Hot-Reloading Python em memoria (importlib.reload).
+- Utilizacao do proprio protocolo AACP (<<<FILE_PATCH>>>) para corrigir dinamicamente o dom_parser.py.
+- Tratamento de excecoes inteligentes no DOMStreamer.

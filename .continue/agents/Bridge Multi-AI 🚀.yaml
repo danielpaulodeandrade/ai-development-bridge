@@ -6,7 +6,7 @@ models:
   - name: Bridge Multi-AI 🚀
     provider: openai
     model: bridge-router
-    apiBase: "http://localhost:8000/v1"
+    apiBase: "http://127.0.0.1:8000/v1"
     apiKey: "dummy-key-not-needed"
     roles:
       - chat

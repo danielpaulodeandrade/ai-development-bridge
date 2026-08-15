@@ -92,11 +92,16 @@ class BrowserDaemon:
             raise RuntimeError("BrowserDaemon não foi iniciado corretamente. Nenhuma aba ativa encontrada.")
 
         current_url = self._active_page.url
-        if not current_url.startswith(url):
+        
+        from urllib.parse import urlparse
+        current_domain = urlparse(current_url).netloc.replace("www.", "")
+        target_domain = urlparse(url).netloc.replace("www.", "")
+        
+        if current_domain != target_domain:
             logger.info(f"Navegando para: {url}")
             await self._active_page.goto(url, wait_until="domcontentloaded")
         else:
-            logger.debug(f"Aba já se encontra no domínio/url {url}.")
+            logger.debug(f"Aba já se encontra no domínio {target_domain}. Preservando chat atual.")
             
         return self._active_page
 
